@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import "./App.css";
+import Table from "./Components/Table";
+import { Component } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const data = require("./api/response.json");
+
+	return (
+		<div className="App">
+			<header className="App-header">
+				<div class="card text-center">
+					<h5 class="card-header">
+						{"Basketball Stats by AOAO".toUpperCase()}
+					</h5>
+					<div class="card-body">
+						<h5 class="card-title">Who's the best player?</h5>
+						<p class="card-text">
+							Click on any column below to sort the table
+							ascending or descending
+						</p>
+						<a
+							href="https://github.com/aoaoberlin/basketball"
+							target="_blank"
+							class="btn btn-primary"
+							rel="noreferrer"
+						>
+							Check us on GitHub
+						</a>
+					</div>
+				</div>
+				<Table data={data} />
+			</header>
+		</div>
+	);
 }
 
 export default App;
