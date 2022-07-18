@@ -3,7 +3,7 @@ import Table from "./Components/Table";
 import { Component } from "react";
 
 function App() {
-	const data = require("./api/response.json");
+	const data = require("./api/stats/stats.json");
 
 	return (
 		<div className="App">
