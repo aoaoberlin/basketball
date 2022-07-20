@@ -43,19 +43,44 @@ const Table = (props) => {
 						<th scope="col">Player</th>
 						<th scope="col">Season</th>
 						<th scope="col">Games played</th>
-						<th scope="col" id="pts" onClick={sortCategory}>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="pts"
+							onClick={sortCategory}
+						>
 							Points/Game
 						</th>
-						<th scope="col" id="ast" onClick={sortCategory}>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="ast"
+							onClick={sortCategory}
+						>
 							Assists/Game
 						</th>
-						<th scope="col" id="reb" onClick={sortCategory}>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="reb"
+							onClick={sortCategory}
+						>
 							Rebounds/Game
 						</th>
-						<th scope="col" id="stl" onClick={sortCategory}>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="stl"
+							onClick={sortCategory}
+						>
 							Steals/Game
 						</th>
-						<th scope="col" id="blk" onClick={sortCategory}>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="blk"
+							onClick={sortCategory}
+						>
 							Blocks/Game
 						</th>
 					</tr>
