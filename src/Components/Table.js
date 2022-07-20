@@ -4,11 +4,11 @@ const Table = (props) => {
 	const players = props.players.data;
 	const [stats, sortStats] = useState(props.stats);
 	const [order, setOrder] = useState({
-		pts: "des",
-		ast: "des",
-		reb: "des",
-		stl: "des",
-		blk: "des",
+		pts: "descending",
+		ast: "descending",
+		reb: "descending",
+		stl: "descending",
+		blk: "descending",
 	});
 
 	const sortCategory = (e) => {
@@ -20,17 +20,17 @@ const Table = (props) => {
 			"in the following way:",
 			order[category]
 		);
-		if (order[category] === "des") {
+		if (order[category] === "descending") {
 			const sortedStats = [...stats].sort(
 				(a, b) => b[category] - a[category]
 			);
-			setOrder({ ...order, [category]: "asc" });
+			setOrder({ ...order, [category]: "ascending" });
 			sortStats(sortedStats);
-		} else if (order[category] === "asc") {
+		} else if (order[category] === "ascending") {
 			const sortedStats = [...stats].sort(
 				(a, b) => a[category] - b[category]
 			);
-			setOrder({ ...order, [category]: "des" });
+			setOrder({ ...order, [category]: "descending" });
 			sortStats(sortedStats);
 		}
 	};
