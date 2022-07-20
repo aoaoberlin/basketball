@@ -1,5 +1,5 @@
 const importAllStats = () => {
-	const firstYear = 1979;
+	const firstYear = 1983;
 	const lastYear = 2021;
 	let stats = [];
 
