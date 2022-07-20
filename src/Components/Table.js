@@ -1,14 +1,39 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 const Table = (props) => {
 	const players = props.players.data;
-	const [stats, sortPlayers] = useState(props.stats);
-	function onCategoryClick(e) {
-		let category = e.target.id;
-		const sorted = [...stats].sort((a, b) => b[category] - a[category]);
-		console.log(sorted);
-		sortPlayers(sorted)
-	}
+	const [stats, sortStats] = useState(props.stats);
+	const [order, setOrder] = useState({
+		pts: "descending",
+		ast: "descending",
+		reb: "descending",
+		stl: "descending",
+		blk: "descending",
+	});
+
+	const sortCategory = (e) => {
+		const category = e.target.id;
+		console.log("category clicked:", category);
+		console.log(
+			"order",
+			category,
+			"in the following way:",
+			order[category]
+		);
+		if (order[category] === "descending") {
+			const sortedStats = [...stats].sort(
+				(a, b) => b[category] - a[category]
+			);
+			setOrder({ ...order, [category]: "ascending" });
+			sortStats(sortedStats);
+		} else if (order[category] === "ascending") {
+			const sortedStats = [...stats].sort(
+				(a, b) => a[category] - b[category]
+			);
+			setOrder({ ...order, [category]: "descending" });
+			sortStats(sortedStats);
+		}
+	};
 
 	return (
 		<div className="table-responsive-sm">
@@ -18,11 +43,46 @@ const Table = (props) => {
 						<th scope="col">Player</th>
 						<th scope="col">Season</th>
 						<th scope="col">Games played</th>
-						<th scope="col" id="pts" onClick={onCategoryClick}>Points/Game</th>
-						<th scope="col" id="ast" onClick={onCategoryClick}>Assists/Game</th>
-						<th scope="col" id="reb" onClick={onCategoryClick}>Rebounds/Game</th>
-						<th scope="col" id="stl" onClick={onCategoryClick}>Steals/Game</th>
-						<th scope="col" id="blk" onClick={onCategoryClick}>Blocks/Game</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="pts"
+							onClick={sortCategory}
+						>
+							Points/Game
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="ast"
+							onClick={sortCategory}
+						>
+							Assists/Game
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="reb"
+							onClick={sortCategory}
+						>
+							Rebounds/Game
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="stl"
+							onClick={sortCategory}
+						>
+							Steals/Game
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="blk"
+							onClick={sortCategory}
+						>
+							Blocks/Game
+						</th>
 					</tr>
 				</thead>
 				<tbody>
