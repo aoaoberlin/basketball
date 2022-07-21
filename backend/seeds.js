@@ -7,22 +7,22 @@ mongoose.connect(MONGO_URI, {
 	useUnifiedTopology: true,
 });
 
-const Season = require("./models/Season.model");
-const seasons = require("../frontend/src/data/stats/stats.json");
+const Stats = require("./models/Stats.model");
+const stats = require("../frontend/src/data/stats/stats.json");
 const players = require("../frontend/src/data/players.json");
 
-const seasonsData = seasons.map((season) => {
+const statsData = stats.map((s) => {
 	const properties = {
 		firstName: "",
 		lastName: "",
-		playerId: season.player_id,
-		year: season.season,
-		games: season.games_played,
-		points: season.pts,
-		rebounds: season.reb,
-		assists: season.ast,
-		steals: season.stl,
-		blocks: season.blk,
+		playerId: s.player_id,
+		year: s.season,
+		games: s.games_played,
+		points: s.pts,
+		rebounds: s.reb,
+		assists: s.ast,
+		steals: s.stl,
+		blocks: s.blk,
 	};
 	const player = players.data.find((x) => x.id === properties.playerId);
 	properties.firstName = player.first_name;
@@ -30,9 +30,9 @@ const seasonsData = seasons.map((season) => {
 	return properties;
 });
 
-Season.insertMany(seasonsData)
-	.then((seasons) => {
-		console.log("Seasons added successfully");
+Stats.insertMany(statsData)
+	.then((s) => {
+		console.log(`Successfully added ${s.length} stats into the database`);
 		mongoose.connection.close();
 	})
 	.catch((err) => console.log(err));
