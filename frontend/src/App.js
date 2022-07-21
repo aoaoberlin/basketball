@@ -1,9 +1,6 @@
 import Table from "./Components/Table";
 
 function App() {
-	const stats = require("./data/stats/stats.json");
-	const players = require("./data/players.json");
-
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -27,7 +24,7 @@ function App() {
 						</a>
 					</div>
 				</div>
-				<Table stats={stats} players={players} />
+				<Table />
 			</header>
 		</div>
 	);

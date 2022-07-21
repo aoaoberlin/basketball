@@ -1,39 +1,51 @@
 import React, { useState, useEffect } from "react";
 
-const Table = (props) => {
-	const players = props.players.data;
-	const [stats, sortStats] = useState(props.stats);
+const Table = () => {
+	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
-		pts: "descending",
-		ast: "descending",
-		reb: "descending",
-		stl: "descending",
-		blk: "descending",
+		points: "descending",
+		assists: "descending",
+		rebounds: "descending",
+		steals: "descending",
+		blocks: "descending",
+		firstName: "descending",
+		year: "descending",
+		games: "descending",
 	});
+
+	useEffect(() => {
+		if (!stats) {
+			getStats();
+		}
+	});
+
+	const getStats = async () => {
+		const axios = require("axios");
+		const statsFromAPI = await axios
+			.get("http://localhost:5005/getStats")
+			.then((response) => response.data.stats)
+			.catch((error) => console.log(error));
+		setStats(statsFromAPI);
+	};
 
 	const sortCategory = (e) => {
 		const category = e.target.id;
-		console.log("category clicked:", category);
-		console.log(
-			"order",
-			category,
-			"in the following way:",
-			order[category]
-		);
 		if (order[category] === "descending") {
 			const sortedStats = [...stats].sort(
 				(a, b) => b[category] - a[category]
 			);
 			setOrder({ ...order, [category]: "ascending" });
-			sortStats(sortedStats);
+			setStats(sortedStats);
 		} else if (order[category] === "ascending") {
 			const sortedStats = [...stats].sort(
 				(a, b) => a[category] - b[category]
 			);
 			setOrder({ ...order, [category]: "descending" });
-			sortStats(sortedStats);
+			setStats(sortedStats);
 		}
 	};
+
+	if (!stats) return; // no data yet
 
 	return (
 		<div className="table-responsive-sm">
@@ -41,12 +53,26 @@ const Table = (props) => {
 				<thead>
 					<tr>
 						<th scope="col">Player</th>
-						<th scope="col">Season</th>
-						<th scope="col">Games played</th>
 						<th
 							scope="col"
 							className="th-pointer"
-							id="pts"
+							id="year"
+							onClick={sortCategory}
+						>
+							Season
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="games"
+							onClick={sortCategory}
+						>
+							Games played
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="points"
 							onClick={sortCategory}
 						>
 							Points/Game
@@ -54,7 +80,7 @@ const Table = (props) => {
 						<th
 							scope="col"
 							className="th-pointer"
-							id="ast"
+							id="assists"
 							onClick={sortCategory}
 						>
 							Assists/Game
@@ -62,7 +88,7 @@ const Table = (props) => {
 						<th
 							scope="col"
 							className="th-pointer"
-							id="reb"
+							id="rebounds"
 							onClick={sortCategory}
 						>
 							Rebounds/Game
@@ -70,7 +96,7 @@ const Table = (props) => {
 						<th
 							scope="col"
 							className="th-pointer"
-							id="stl"
+							id="steals"
 							onClick={sortCategory}
 						>
 							Steals/Game
@@ -78,7 +104,7 @@ const Table = (props) => {
 						<th
 							scope="col"
 							className="th-pointer"
-							id="blk"
+							id="blocks"
 							onClick={sortCategory}
 						>
 							Blocks/Game
@@ -86,22 +112,18 @@ const Table = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{stats.map((player, index) => (
-						<tr key={String(index) + String(player.player_id)}>
+					{stats.map((player) => (
+						<tr key={player._id}>
 							<th scope="row">
-								{players
-									.filter((p) => p.id === player.player_id)
-									.map(
-										(p) => p.first_name + " " + p.last_name
-									)}
+								{player.firstName + " " + player.lastName}
 							</th>
-							<td>{player.season}</td>
-							<td>{player.games_played}</td>
-							<td>{player.pts}</td>
-							<td>{player.ast}</td>
-							<td>{player.reb}</td>
-							<td>{player.stl}</td>
-							<td>{player.blk}</td>
+							<td>{player.year}</td>
+							<td>{player.games}</td>
+							<td>{player.points}</td>
+							<td>{player.assists}</td>
+							<td>{player.rebounds}</td>
+							<td>{player.steals}</td>
+							<td>{player.blocks}</td>
 						</tr>
 					))}
 				</tbody>
