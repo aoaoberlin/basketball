@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import usePagination from "./Hooks/usePagination";
+import TableFooter from "./TableFooter";
 
-const Table = () => {
+const Table = ({rowsPerPage}) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		points: "descending",
@@ -12,6 +14,10 @@ const Table = () => {
 		year: "descending",
 		games: "descending",
 	});
+
+	const [page, setPage] = useState(1);
+  	const { slice, range } = usePagination(stats, page, rowsPerPage);
+
 
 	useEffect(() => {
 		if (!stats) {
@@ -112,7 +118,7 @@ const Table = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{stats.map((player) => (
+					{slice.map((player) => (
 						<tr key={player._id}>
 							<th scope="row">
 								{player.firstName + " " + player.lastName}
@@ -128,6 +134,7 @@ const Table = () => {
 					))}
 				</tbody>
 			</table>
+			<TableFooter range={range} slice={slice} setPage={setPage} page={page} />
 		</div>
 	);
 };
