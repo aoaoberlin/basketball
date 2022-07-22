@@ -66,7 +66,17 @@ const Table = () => {
 
 	return (
 		<React.Fragment>
-			<input type="text" value={search} onChange={handleSearchChange} />
+			<div className="form-outline row d-flex justify-content-center">
+				<input
+					type="search"
+					id="seach-input"
+					className="form-control"
+					placeholder="Search"
+					aria-label="Search"
+					value={search}
+					onChange={handleSearchChange}
+				/>
+			</div>
 			<div className="table-responsive-sm">
 				<table className="table table-hover table-striped">
 					<thead>
