@@ -27,54 +27,26 @@ const Pagination = ({ setPage, page, slice, range }) => {
 
 	return (
 		<nav aria-label="Pagination">
-			<ul class="pagination justify-content-center">
-				{page === 1 ? (
-					<li class="page-item disabled">
-						<button className="page-link" onClick={goToFirstPage}>
-							first
-						</button>
-					</li>
-				) : (
-					<li class="page-item">
-						<button className="page-link" onClick={goToFirstPage}>
-							first
-						</button>
-					</li>
-				)}
+			<ul className="pagination justify-content-center">
+				<li className={"page-item " + (page === 1 ? "disabled" : "")}>
+					<button className="page-link" onClick={goToFirstPage}>
+						first
+					</button>
+				</li>
 
-				{page === 1 ? (
-					<li class="page-item disabled">
-						<button
-							className="page-link"
-							onClick={goToPreviousPage}
-						>
-							&#60;
-						</button>
-					</li>
-				) : (
-					<li class="page-item">
-						<button
-							className="page-link"
-							onClick={goToPreviousPage}
-						>
-							&#60;
-						</button>
-					</li>
-				)}
+				<li className={"page-item " + (page === 1 ? "disabled" : "")}>
+					<button className="page-link" onClick={goToPreviousPage}>
+						&#60;
+					</button>
+				</li>
 
 				{getPaginationGroup().map((item, index) =>
-					item > range.length ? null : page === item ? (
-						<li class="page-item active">
-							<button
-								className="page-link"
-								key={index}
-								onClick={() => setPage(item)}
-							>
-								{item}
-							</button>
-						</li>
-					) : (
-						<li class="page-item">
+					item > range.length ? null : (
+						<li
+							className={
+								"page-item " + (page === item ? "active" : "")
+							}
+						>
 							<button
 								className="page-link"
 								key={index}
@@ -86,33 +58,25 @@ const Pagination = ({ setPage, page, slice, range }) => {
 					)
 				)}
 
-				{page === range.length ? (
-					<li class="page-item disabled">
-						<button className="page-link" onClick={goToNextPage}>
-							&#62;
-						</button>
-					</li>
-				) : (
-					<li class="page-item">
-						<button className="page-link" onClick={goToNextPage}>
-							&#62;
-						</button>
-					</li>
-				)}
+				<li
+					className={
+						"page-item " + (page === range.length ? "disabled" : "")
+					}
+				>
+					<button className="page-link" onClick={goToNextPage}>
+						&#62;
+					</button>
+				</li>
 
-				{page === range.length ? (
-					<li class="page-item disabled">
-						<button className="page-link" onClick={goToLastPage}>
-							last
-						</button>
-					</li>
-				) : (
-					<li class="page-item">
-						<button className="page-link" onClick={goToLastPage}>
-							last
-						</button>
-					</li>
-				)}
+				<li
+					className={
+						"page-item " + (page === range.length ? "disabled" : "")
+					}
+				>
+					<button className="page-link" onClick={goToLastPage}>
+						last
+					</button>
+				</li>
 			</ul>
 		</nav>
 	);
