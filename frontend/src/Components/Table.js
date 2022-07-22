@@ -10,8 +10,7 @@ const Table = ({ rowsPerPage }) => {
 		rebounds: "descending",
 		steals: "descending",
 		blocks: "descending",
-		firstName: "descending",
-		year: "descending",
+		year: "ascending",
 		games: "descending",
 	});
 
