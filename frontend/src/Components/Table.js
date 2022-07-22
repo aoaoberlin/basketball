@@ -134,7 +134,7 @@ const Table = ({rowsPerPage}) => {
 					))}
 				</tbody>
 			</table>
-			<TableFooter range={range} slice={slice} setPage={setPage} page={page} />
+			<TableFooter slice={slice} setPage={setPage} page={page} range={range} />
 		</div>
 	);
 };
