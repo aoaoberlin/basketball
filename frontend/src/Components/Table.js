@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const Table = ({ rowsPerPage }) => {
+const Table = () => {
+	const rowsPerPage = 10;
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		points: "descending",

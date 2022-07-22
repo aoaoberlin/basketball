@@ -24,7 +24,7 @@ function App() {
 						</a>
 					</div>
 				</div>
-				<Table rowsPerPage={10}/>
+				<Table />
 			</header>
 		</div>
 	);

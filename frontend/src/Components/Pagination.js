@@ -48,7 +48,7 @@ const Pagination = ({ setPage, page, slice, range }) => {
 							className="page-link"
 							onClick={goToPreviousPage}
 						>
-							prev
+							&#60;
 						</button>
 					</li>
 				) : (
@@ -57,7 +57,7 @@ const Pagination = ({ setPage, page, slice, range }) => {
 							className="page-link"
 							onClick={goToPreviousPage}
 						>
-							prev
+							&#60;
 						</button>
 					</li>
 				)}
@@ -89,13 +89,13 @@ const Pagination = ({ setPage, page, slice, range }) => {
 				{page === range.length ? (
 					<li class="page-item disabled">
 						<button className="page-link" onClick={goToNextPage}>
-							next
+							&#62;
 						</button>
 					</li>
 				) : (
 					<li class="page-item">
 						<button className="page-link" onClick={goToNextPage}>
-							next
+							&#62;
 						</button>
 					</li>
 				)}
