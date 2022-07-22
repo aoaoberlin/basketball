@@ -14,9 +14,9 @@ const Table = () => {
 		year: "ascending",
 		games: "descending",
 	});
-
 	const [page, setPage] = useState(1);
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
+	const [search, setNewSearch] = useState("");
 
 	useEffect(() => {
 		if (!stats) {
@@ -50,96 +50,111 @@ const Table = () => {
 		}
 	};
 
+	const handleSearchChange = (e) => {
+		setNewSearch(e.target.value);
+	};
+
+	const filteredSlice = !search
+		? slice
+		: slice.filter(
+				(s) =>
+					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
+					s.lastName.toLowerCase().includes(search.toLowerCase())
+		  );
+
 	if (!stats) return; // no data yet
 
 	return (
-		<div className="table-responsive-sm">
-			<table className="table table-hover table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Player</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="year"
-							onClick={sortCategory}
-						>
-							Season
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="games"
-							onClick={sortCategory}
-						>
-							Games played
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="points"
-							onClick={sortCategory}
-						>
-							Points/Game
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="assists"
-							onClick={sortCategory}
-						>
-							Assists/Game
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="rebounds"
-							onClick={sortCategory}
-						>
-							Rebounds/Game
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="steals"
-							onClick={sortCategory}
-						>
-							Steals/Game
-						</th>
-						<th
-							scope="col"
-							className="th-pointer"
-							id="blocks"
-							onClick={sortCategory}
-						>
-							Blocks/Game
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{slice.map((player) => (
-						<tr key={player._id}>
-							<th scope="row">
-								{player.firstName + " " + player.lastName}
+		<React.Fragment>
+			<input type="text" value={search} onChange={handleSearchChange} />
+			<div className="table-responsive-sm">
+				<table className="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Player</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="year"
+								onClick={sortCategory}
+							>
+								Season
 							</th>
-							<td>{player.year}</td>
-							<td>{player.games}</td>
-							<td>{player.points}</td>
-							<td>{player.assists}</td>
-							<td>{player.rebounds}</td>
-							<td>{player.steals}</td>
-							<td>{player.blocks}</td>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="games"
+								onClick={sortCategory}
+							>
+								Games played
+							</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="points"
+								onClick={sortCategory}
+							>
+								Points/Game
+							</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="assists"
+								onClick={sortCategory}
+							>
+								Assists/Game
+							</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="rebounds"
+								onClick={sortCategory}
+							>
+								Rebounds/Game
+							</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="steals"
+								onClick={sortCategory}
+							>
+								Steals/Game
+							</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="blocks"
+								onClick={sortCategory}
+							>
+								Blocks/Game
+							</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
-			<Pagination
-				slice={slice}
-				setPage={setPage}
-				page={page}
-				range={range}
-			/>
-		</div>
+					</thead>
+					<tbody>
+						{filteredSlice.map((player) => (
+							<tr key={player._id}>
+								<th scope="row">
+									{player.firstName + " " + player.lastName}
+								</th>
+								<td>{player.year}</td>
+								<td>{player.games}</td>
+								<td>{player.points}</td>
+								<td>{player.assists}</td>
+								<td>{player.rebounds}</td>
+								<td>{player.steals}</td>
+								<td>{player.blocks}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<Pagination
+					slice={slice}
+					setPage={setPage}
+					page={page}
+					range={range}
+				/>
+			</div>
+		</React.Fragment>
 	);
 };
 
