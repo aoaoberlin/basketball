@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
-import TableFooter from "./TableFooter";
+import Pagination from "./Pagination";
 
-const Table = ({rowsPerPage}) => {
+const Table = ({ rowsPerPage }) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		points: "descending",
@@ -16,8 +16,7 @@ const Table = ({rowsPerPage}) => {
 	});
 
 	const [page, setPage] = useState(1);
-  	const { slice, range } = usePagination(stats, page, rowsPerPage);
-
+	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
 	useEffect(() => {
 		if (!stats) {
@@ -134,7 +133,12 @@ const Table = ({rowsPerPage}) => {
 					))}
 				</tbody>
 			</table>
-			<TableFooter slice={slice} setPage={setPage} page={page} range={range} />
+			<Pagination
+				slice={slice}
+				setPage={setPage}
+				page={page}
+				range={range}
+			/>
 		</div>
 	);
 };
