@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
+import TableAssists from "./TablesAssists";
+import TablePoints from "./TablesPoints";
 
-const Table = () => {
+const Tables = () => {
 	console.log("inside Table");
 	const rowsPerPage = 10;
 	const [stats, setStats] = useState("");
@@ -66,7 +68,7 @@ const Table = () => {
 					s.lastName.toLowerCase().includes(search.toLowerCase())
 		  );
 
-	if (!stats) {
+	if (filteredSlice.length === 0) {
 		console.log("inside Table -> no data yet");
 		return;
 	} // no data yet
@@ -84,95 +86,52 @@ const Table = () => {
 					onChange={handleSearchChange}
 				/>
 			</div>
-			<div className="table-responsive-sm">
-				<table className="table table-hover table-striped">
-					<thead>
-						<tr>
-							<th scope="col">Player</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="year"
-								onClick={sortCategory}
-							>
-								Season
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="games"
-								onClick={sortCategory}
-							>
-								Games played
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="points"
-								onClick={sortCategory}
-							>
-								Points/Game
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="assists"
-								onClick={sortCategory}
-							>
-								Assists/Game
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="rebounds"
-								onClick={sortCategory}
-							>
-								Rebounds/Game
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="steals"
-								onClick={sortCategory}
-							>
-								Steals/Game
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="blocks"
-								onClick={sortCategory}
-							>
-								Blocks/Game
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{filteredSlice.map((player) => (
-							<tr key={player._id}>
-								<th scope="row">
-									{player.firstName + " " + player.lastName}
-								</th>
-								<td>{player.year}</td>
-								<td>{player.games}</td>
-								<td>{player.points}</td>
-								<td>{player.assists}</td>
-								<td>{player.rebounds}</td>
-								<td>{player.steals}</td>
-								<td>{player.blocks}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-				<Pagination
-					slice={slice}
-					setPage={setPage}
-					page={page}
-					range={range}
-				/>
-			</div>
+			<TablePoints
+				name={"Points/Game"}
+				filteredSlice={filteredSlice}
+				category={"points"}
+			/>
+			{console.log("filteredSlice inside Table -> return", filteredSlice)}
+			<TableAssists
+				name={"Assists/Game"}
+				filteredSlice={filteredSlice}
+				category={"assists"}
+			/>
+			{/* <TableRebounds
+				name="Rebounds/Game"
+				filteredSlice={filteredSlice.map((f) => ({
+					name: f.firstName + " " + f.lastName,
+					year: f.year,
+					games: f.games,
+					stats: f.rebounds,
+				}))}
+			/>
+			<TableSteals
+				name="Steals/Game"
+				filteredSlice={filteredSlice.map((f) => ({
+					name: f.firstName + " " + f.lastName,
+					year: f.year,
+					games: f.games,
+					stats: f.steals,
+				}))}
+			/>
+			<TableBlocks
+				name="Blocks/Game"
+				filteredSlice={filteredSlice.map((f) => ({
+					name: f.firstName + " " + f.lastName,
+					year: f.year,
+					games: f.games,
+					stats: f.blocks,
+				}))}
+			/> */}
+			<Pagination
+				slice={slice}
+				setPage={setPage}
+				page={page}
+				range={range}
+			/>
 		</React.Fragment>
 	);
 };
 
-export default Table;
+export default Tables;

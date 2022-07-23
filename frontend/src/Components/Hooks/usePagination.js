@@ -25,7 +25,7 @@ const calculateRange = (data, rowsPerPage) => {
 	for (let i = 1; i <= num; i++) {
 		range.push(i);
 	}
-	console.log("new range:", range);
+	// console.log("new range:", range);
 	return range;
 };
 

@@ -1,4 +1,4 @@
-import Table from "./Components/Table";
+import Tables from "./Components/Tables";
 
 function App() {
 	return (
@@ -24,7 +24,7 @@ function App() {
 						</a>
 					</div>
 				</div>
-				<Table />
+				<Tables />
 			</header>
 		</div>
 	);
