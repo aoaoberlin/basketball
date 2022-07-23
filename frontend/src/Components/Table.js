@@ -3,6 +3,7 @@ import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
 const Table = () => {
+	console.log("inside Table");
 	const rowsPerPage = 10;
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
@@ -19,12 +20,14 @@ const Table = () => {
 	const [search, setNewSearch] = useState("");
 
 	useEffect(() => {
+		console.log("inside Table -> useEffect");
 		if (!stats) {
 			getStats();
 		}
 	});
 
 	const getStats = async () => {
+		console.log("inside Table -> getStats");
 		const axios = require("axios");
 		const statsFromAPI = await axios
 			.get("http://localhost:5005/getStats")
@@ -51,6 +54,7 @@ const Table = () => {
 	};
 
 	const handleSearchChange = (e) => {
+		console.log("inside Table -> handleSearchChange");
 		setNewSearch(e.target.value);
 	};
 
@@ -62,7 +66,10 @@ const Table = () => {
 					s.lastName.toLowerCase().includes(search.toLowerCase())
 		  );
 
-	if (!stats) return; // no data yet
+	if (!stats) {
+		console.log("inside Table -> no data yet");
+		return;
+	} // no data yet
 
 	return (
 		<React.Fragment>
