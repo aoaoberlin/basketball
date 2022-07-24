@@ -3,8 +3,8 @@ import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
 const TablePoints = ({ name, fullStats, category }) => {
-	console.log("inside TablePoints");
-	console.log("inside TablePoints -> fullStats:", fullStats);
+	// console.log("inside TablePoints");
+	// console.log("inside TablePoints -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -18,10 +18,10 @@ const TablePoints = ({ name, fullStats, category }) => {
 	// console.log("inside TablePoints -> stats", stats);
 
 	useEffect(() => {
-		console.log("inside TablePoints -> useEffect");
+		// console.log("inside TablePoints -> useEffect");
 		if (!stats || stats.length !== fullStats.length) {
-			console.log("inside TablePoints -> no stats yet");
-			console.log("inside TablePoints -> category:", category);
+			// console.log("inside TablePoints -> no stats yet");
+			// console.log("inside TablePoints -> category:", category);
 			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
@@ -30,12 +30,12 @@ const TablePoints = ({ name, fullStats, category }) => {
 	}, [stats, fullStats, category]);
 
 	const sortCategory = (e) => {
-		console.log("inside TablePoints -> sortCategory");
+		// console.log("inside TablePoints -> sortCategory");
 		const category = e.target.id;
-		console.log("category to be sorted:", category);
+		// console.log("category to be sorted:", category);
 		// console.log("stats until now:", stats);
 		if (order[category] === "descending") {
-			console.log("order of category is descending");
+			// console.log("order of category is descending");
 			const sortedStats = [...stats].sort(
 				(a, b) => b[category] - a[category]
 			);
@@ -50,12 +50,12 @@ const TablePoints = ({ name, fullStats, category }) => {
 					: (orderClone[key] = "descending")
 			);
 			orderClone = { ...orderClone, [category]: "ascending" };
-			console.log("orderClone", orderClone);
+			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
 			setStats(sortedStats);
 		} else if (order[category] === "ascending") {
-			console.log("order of category is ascending");
+			// console.log("order of category is ascending");
 			const sortedStats = [...stats].sort(
 				(a, b) => a[category] - b[category]
 			);
@@ -70,7 +70,7 @@ const TablePoints = ({ name, fullStats, category }) => {
 					: (orderClone[key] = "descending")
 			);
 			orderClone = { ...orderClone, [category]: "descending" };
-			console.log("orderClone", orderClone);
+			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
 			setStats(sortedStats);
@@ -78,7 +78,7 @@ const TablePoints = ({ name, fullStats, category }) => {
 	};
 
 	if (!stats) {
-		console.log("inside TablePoints -> no data yet");
+		// console.log("inside TablePoints -> no data yet");
 		return;
 	} // no data yet
 

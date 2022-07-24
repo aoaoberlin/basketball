@@ -6,19 +6,19 @@ import TableSteals from "./TableSteals";
 import TableBlocks from "./TableBlocks";
 
 const Tables = () => {
-	console.log("inside Table");
+	// console.log("inside Table");
 	const [stats, setStats] = useState("");
 	const [search, setSearch] = useState("");
 
 	useEffect(() => {
-		console.log("inside Table -> useEffect");
+		// console.log("inside Table -> useEffect");
 		if (!stats) {
 			getStats();
 		}
 	});
 
 	const getStats = async () => {
-		console.log("inside Table -> getStats");
+		// console.log("inside Table -> getStats");
 		const axios = require("axios");
 		const statsFromAPI = await axios
 			.get("http://localhost:5005/getStats")
@@ -28,7 +28,7 @@ const Tables = () => {
 	};
 
 	const handleSearchChange = (e) => {
-		console.log("inside Table -> handleSearchChange");
+		// console.log("inside Table -> handleSearchChange");
 		setSearch(e.target.value);
 	};
 
@@ -43,12 +43,12 @@ const Tables = () => {
 		  );
 
 	if (!filteredStats) {
-		console.log("inside Table -> no data yet");
+		// console.log("inside Table -> no data yet");
 		return;
 	} // no data yet
 
-	console.log("search:", search);
-	console.log("filteredStats:", filteredStats);
+	// console.log("search:", search);
+	// console.log("filteredStats:", filteredStats);
 
 	return (
 		<React.Fragment>
@@ -83,21 +83,37 @@ const Tables = () => {
 					</div>
 				</div>
 			</div>
-			{/* <TableRebounds
-				name="Rebounds/Game"
-				fullStats={stats}
-				category={"rebounds"}
-			/>
-			<TableSteals
-				name="Steals/Game"
-				fullStats={stats}
-				category={"steals"}
-			/>
-			<TableBlocks
-				name="Blocks/Game"
-				fullStats={stats}
-				category={"blocks"}
-			/> */}
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<TableRebounds
+							name="Rebounds/Game"
+							fullStats={filteredStats}
+							category={"rebounds"}
+						/>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<TableSteals
+							name="Steals/Game"
+							fullStats={filteredStats}
+							category={"steals"}
+						/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<TableBlocks
+							name="Blocks/Game"
+							fullStats={filteredStats}
+							category={"blocks"}
+						/>
+					</div>
+				</div>
+			</div>
 		</React.Fragment>
 	);
 };

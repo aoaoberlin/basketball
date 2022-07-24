@@ -2,68 +2,88 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableRebounds = ({ name, filteredSlice, category }) => {
-	console.log("inside TableRebounds");
+const TableRebounds = ({ name, fullStats, category }) => {
+	// console.log("inside TableRebounds");
+	// console.log("inside TableRebounds -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
 		year: "ascending",
 		games: "descending",
 	});
+	const [page, setPage] = useState(1);
+	const rowsPerPage = 10;
+	const { slice, range } = usePagination(stats, page, rowsPerPage);
+
+	// console.log("inside TableRebounds -> stats", stats);
 
 	useEffect(() => {
-		console.log("inside TableRebounds -> useEffect");
-		if (!stats) {
-			console.log("inside TableRebounds -> no stats yet");
-			console.log("inside TableRebounds -> category:", category);
-			let sortedFilteredSlice = JSON.parse(JSON.stringify(filteredSlice));
-			sortedFilteredSlice.sort((a, b) => b[category] - a[category]);
-			setStats(sortedFilteredSlice);
+		// console.log("inside TableRebounds -> useEffect");
+		if (!stats || stats.length !== fullStats.length) {
+			// console.log("inside TableRebounds -> no stats yet");
+			// console.log("inside TableRebounds -> category:", category);
+			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
+			sortedFullStats.sort((a, b) => b[category] - a[category]);
+			setStats(sortedFullStats);
+			setPage(1);
 		}
-	}, [stats, filteredSlice, category]);
-
-	if (!stats) {
-		console.log("inside TableRebounds -> no data yet");
-		return;
-	} // no data yet
+	}, [stats, fullStats, category]);
 
 	const sortCategory = (e) => {
-		console.log("inside TableRebounds -> sortCategory");
+		// console.log("inside TableRebounds -> sortCategory");
 		const category = e.target.id;
-		console.log("category to be sorted:", category);
-		console.log("stats until now:", stats);
+		// console.log("category to be sorted:", category);
+		// console.log("stats until now:", stats);
 		if (order[category] === "descending") {
-			console.log("order of category is descending");
+			// console.log("order of category is descending");
 			const sortedStats = [...stats].sort(
 				(a, b) => b[category] - a[category]
 			);
-			console.log("sortedStats", sortedStats);
-			setOrder({ ...order, [category]: "ascending" });
+			// console.log("sortedStats", sortedStats);
+
+			let orderClone = JSON.parse(JSON.stringify(order));
+			Object.keys(orderClone).forEach((key) =>
+				key === "games"
+					? (orderClone[key] = "descending")
+					: key === "year"
+					? (orderClone[key] = "ascending")
+					: (orderClone[key] = "descending")
+			);
+			orderClone = { ...orderClone, [category]: "ascending" };
+			// console.log("orderClone", orderClone);
+
+			setOrder(orderClone);
 			setStats(sortedStats);
 		} else if (order[category] === "ascending") {
-			console.log("order of category is ascending");
+			// console.log("order of category is ascending");
 			const sortedStats = [...stats].sort(
 				(a, b) => a[category] - b[category]
 			);
-			console.log("sortedStats", sortedStats);
-			setOrder({ ...order, [category]: "descending" });
+			// console.log("sortedStats", sortedStats);
+
+			let orderClone = JSON.parse(JSON.stringify(order));
+			Object.keys(orderClone).forEach((key) =>
+				key === "games"
+					? (orderClone[key] = "descending")
+					: key === "year"
+					? (orderClone[key] = "ascending")
+					: (orderClone[key] = "descending")
+			);
+			orderClone = { ...orderClone, [category]: "descending" };
+			// console.log("orderClone", orderClone);
+
+			setOrder(orderClone);
 			setStats(sortedStats);
 		}
 	};
 
+	if (!stats) {
+		// console.log("inside TableRebounds -> no data yet");
+		return;
+	} // no data yet
+
 	return (
 		<React.Fragment>
-			{/* <div className="form-outline row d-flex justify-content-center">
-				<input
-					type="search"
-					id="seach-input"
-					className="form-control"
-					placeholder="Search"
-					aria-label="Search"
-					value={search}
-					onChange={handleSearchChange}
-				/>
-			</div> */}
 			<div className="table-responsive-sm">
 				<table className="table table-hover table-striped">
 					<thead>
@@ -96,28 +116,24 @@ const TableRebounds = ({ name, filteredSlice, category }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{stats
-							// .sort((a, b) => b[category] - a[category])
-							.map((player) => (
-								<tr key={player._id}>
-									<th scope="row">
-										{player.firstName +
-											" " +
-											player.lastName}
-									</th>
-									<td>{player.year}</td>
-									<td>{player.games}</td>
-									<td>{player[category]}</td>
-								</tr>
-							))}
+						{slice.map((player) => (
+							<tr key={player._id}>
+								<th scope="row">
+									{player.firstName + " " + player.lastName}
+								</th>
+								<td>{player.year}</td>
+								<td>{player.games}</td>
+								<td>{player[category]}</td>
+							</tr>
+						))}
 					</tbody>
 				</table>
-				{/* <Pagination
+				<Pagination
 					slice={slice}
 					setPage={setPage}
 					page={page}
 					range={range}
-				/> */}
+				/>
 			</div>
 		</React.Fragment>
 	);
