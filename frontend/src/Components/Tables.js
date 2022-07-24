@@ -63,16 +63,26 @@ const Tables = () => {
 					onChange={handleSearchChange}
 				/>
 			</div>
-			<TablePoints
-				name={"Points/Game"}
-				fullStats={filteredStats}
-				category={"points"}
-			/>
-			<TableAssists
-				name={"Assists/Game"}
-				fullStats={filteredStats}
-				category={"assists"}
-			/>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<TablePoints
+							name={"Points/Game"}
+							fullStats={filteredStats}
+							category={"points"}
+						/>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<TableAssists
+							name={"Assists/Game"}
+							fullStats={filteredStats}
+							category={"assists"}
+						/>
+					</div>
+				</div>
+			</div>
 			{/* <TableRebounds
 				name="Rebounds/Game"
 				fullStats={stats}
