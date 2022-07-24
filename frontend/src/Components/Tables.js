@@ -34,10 +34,10 @@ const Tables = () => {
 
 	const filteredStats = !search
 		? stats
-		: stats.filter(
-				(s) =>
-					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
-					s.lastName.toLowerCase().includes(search.toLowerCase())
+		: stats.filter((s) =>
+				[s.firstName.toLowerCase(), s.lastName.toLowerCase()]
+					.join(" ")
+					.includes(search.toLowerCase())
 		  );
 
 	if (!filteredStats) {
