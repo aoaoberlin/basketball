@@ -25,7 +25,17 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
+
+			// brings page back to 1  after searching for a player
 			setPage(1);
+
+			// resets order settings after searching for a player
+			setOrder({
+				[category]: "ascending",
+				name: "ascending",
+				season: "ascending",
+				games: "descending",
+			});
 		}
 	}, [stats, fullStats, category]);
 
