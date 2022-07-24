@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
-import TableAssists from "./TablesAssists";
-import TablePoints from "./TablesPoints";
+import TableAssists from "./TableAssists";
+import TablePoints from "./TablePoints";
 
 const Tables = () => {
 	console.log("inside Table");
@@ -38,23 +38,6 @@ const Tables = () => {
 		setStats(statsFromAPI);
 	};
 
-	const sortCategory = (e) => {
-		const category = e.target.id;
-		if (order[category] === "descending") {
-			const sortedStats = [...stats].sort(
-				(a, b) => b[category] - a[category]
-			);
-			setOrder({ ...order, [category]: "ascending" });
-			setStats(sortedStats);
-		} else if (order[category] === "ascending") {
-			const sortedStats = [...stats].sort(
-				(a, b) => a[category] - b[category]
-			);
-			setOrder({ ...order, [category]: "descending" });
-			setStats(sortedStats);
-		}
-	};
-
 	const handleSearchChange = (e) => {
 		console.log("inside Table -> handleSearchChange");
 		setNewSearch(e.target.value);
@@ -86,12 +69,11 @@ const Tables = () => {
 					onChange={handleSearchChange}
 				/>
 			</div>
-			<TablePoints
+			{/* {/* <TablePoints
 				name={"Points/Game"}
 				filteredSlice={filteredSlice}
 				category={"points"}
-			/>
-			{console.log("filteredSlice inside Table -> return", filteredSlice)}
+			/> */}
 			<TableAssists
 				name={"Assists/Game"}
 				filteredSlice={filteredSlice}
@@ -124,12 +106,12 @@ const Tables = () => {
 					stats: f.blocks,
 				}))}
 			/> */}
-			<Pagination
+			{/* <Pagination
 				slice={slice}
 				setPage={setPage}
 				page={page}
 				range={range}
-			/>
+			/> */}
 		</React.Fragment>
 	);
 };
