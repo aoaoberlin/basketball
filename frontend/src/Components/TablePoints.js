@@ -15,7 +15,7 @@ const TablePoints = ({ name, fullStats, category }) => {
 	const rowsPerPage = 10;
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
-	console.log("inside TablePoints -> stats", stats);
+	// console.log("inside TablePoints -> stats", stats);
 
 	useEffect(() => {
 		console.log("inside TablePoints -> useEffect");
@@ -33,22 +33,46 @@ const TablePoints = ({ name, fullStats, category }) => {
 		console.log("inside TablePoints -> sortCategory");
 		const category = e.target.id;
 		console.log("category to be sorted:", category);
-		console.log("stats until now:", stats);
+		// console.log("stats until now:", stats);
 		if (order[category] === "descending") {
 			console.log("order of category is descending");
 			const sortedStats = [...stats].sort(
 				(a, b) => b[category] - a[category]
 			);
-			console.log("sortedStats", sortedStats);
-			setOrder({ ...order, [category]: "ascending" });
+			// console.log("sortedStats", sortedStats);
+
+			let orderClone = JSON.parse(JSON.stringify(order));
+			Object.keys(orderClone).forEach((key) =>
+				key === "games"
+					? (orderClone[key] = "descending")
+					: key === "year"
+					? (orderClone[key] = "ascending")
+					: (orderClone[key] = "descending")
+			);
+			orderClone = { ...orderClone, [category]: "ascending" };
+			console.log("orderClone", orderClone);
+
+			setOrder(orderClone);
 			setStats(sortedStats);
 		} else if (order[category] === "ascending") {
 			console.log("order of category is ascending");
 			const sortedStats = [...stats].sort(
 				(a, b) => a[category] - b[category]
 			);
-			console.log("sortedStats", sortedStats);
-			setOrder({ ...order, [category]: "descending" });
+			// console.log("sortedStats", sortedStats);
+
+			let orderClone = JSON.parse(JSON.stringify(order));
+			Object.keys(orderClone).forEach((key) =>
+				key === "games"
+					? (orderClone[key] = "descending")
+					: key === "year"
+					? (orderClone[key] = "ascending")
+					: (orderClone[key] = "descending")
+			);
+			orderClone = { ...orderClone, [category]: "descending" };
+			console.log("orderClone", orderClone);
+
+			setOrder(orderClone);
 			setStats(sortedStats);
 		}
 	};
