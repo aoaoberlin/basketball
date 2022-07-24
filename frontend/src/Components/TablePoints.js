@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 
 const TablePoints = ({ name, fullStats, category }) => {
 	console.log("inside TablePoints");
+	console.log("inside TablePoints -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -13,36 +14,20 @@ const TablePoints = ({ name, fullStats, category }) => {
 	const [page, setPage] = useState(1);
 	const rowsPerPage = 10;
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
-	const [search, setNewSearch] = useState("");
+
+	console.log("inside TablePoints -> stats", stats);
 
 	useEffect(() => {
 		console.log("inside TablePoints -> useEffect");
-		if (!stats) {
+		if (!stats || stats.length !== fullStats.length) {
 			console.log("inside TablePoints -> no stats yet");
 			console.log("inside TablePoints -> category:", category);
 			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
+			setPage(1);
 		}
 	}, [stats, fullStats, category]);
-
-	const handleSearchChange = (e) => {
-		console.log("inside Table -> handleSearchChange");
-		setNewSearch(e.target.value);
-	};
-
-	const filteredSlice = !search
-		? slice
-		: slice.filter(
-				(s) =>
-					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
-					s.lastName.toLowerCase().includes(search.toLowerCase())
-		  );
-
-	if (!fullStats) {
-		console.log("inside TablePoints -> no data yet");
-		return;
-	} // no data yet
 
 	const sortCategory = (e) => {
 		console.log("inside TablePoints -> sortCategory");
@@ -68,19 +53,13 @@ const TablePoints = ({ name, fullStats, category }) => {
 		}
 	};
 
+	if (!stats) {
+		console.log("inside TablePoints -> no data yet");
+		return;
+	} // no data yet
+
 	return (
 		<React.Fragment>
-			<div className="form-outline row d-flex justify-content-center">
-				<input
-					type="search"
-					id="seach-input"
-					className="form-control"
-					placeholder="Search"
-					aria-label="Search"
-					value={search}
-					onChange={handleSearchChange}
-				/>
-			</div>
 			<div className="table-responsive-sm">
 				<table className="table table-hover table-striped">
 					<thead>
@@ -113,7 +92,7 @@ const TablePoints = ({ name, fullStats, category }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{filteredSlice.map((player) => (
+						{slice.map((player) => (
 							<tr key={player._id}>
 								<th scope="row">
 									{player.firstName + " " + player.lastName}

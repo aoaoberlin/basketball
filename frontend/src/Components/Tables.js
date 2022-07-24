@@ -8,6 +8,7 @@ import TableBlocks from "./TableBlocks";
 const Tables = () => {
 	console.log("inside Table");
 	const [stats, setStats] = useState("");
+	const [search, setSearch] = useState("");
 
 	useEffect(() => {
 		console.log("inside Table -> useEffect");
@@ -26,21 +27,48 @@ const Tables = () => {
 		setStats(statsFromAPI);
 	};
 
-	if (!stats) {
+	const handleSearchChange = (e) => {
+		console.log("inside Table -> handleSearchChange");
+		setSearch(e.target.value);
+	};
+
+	const filteredStats = !search
+		? stats
+		: stats.filter(
+				(s) =>
+					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
+					s.lastName.toLowerCase().includes(search.toLowerCase())
+		  );
+
+	if (!filteredStats) {
 		console.log("inside Table -> no data yet");
 		return;
 	} // no data yet
 
+	console.log("search:", search);
+	console.log("filteredStats:", filteredStats);
+
 	return (
 		<React.Fragment>
+			<div className="form-outline row d-flex justify-content-center">
+				<input
+					type="search"
+					id="seach-input"
+					className="form-control"
+					placeholder="Search"
+					aria-label="Search"
+					value={search}
+					onChange={handleSearchChange}
+				/>
+			</div>
 			<TablePoints
 				name={"Points/Game"}
-				fullStats={stats}
+				fullStats={filteredStats}
 				category={"points"}
 			/>
 			<TableAssists
 				name={"Assists/Game"}
-				fullStats={stats}
+				fullStats={filteredStats}
 				category={"assists"}
 			/>
 			{/* <TableRebounds

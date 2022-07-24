@@ -27,6 +27,8 @@ const Pagination = ({ setPage, page, slice, range }) => {
 		}
 	}, [slice, page, setPage]);
 
+	if (range <= 1) return;
+
 	return (
 		<nav aria-label="Pagination">
 			<ul className="pagination justify-content-center">
