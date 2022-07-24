@@ -2,3 +2,6 @@
 /backend/node_modules
 /backend/.env
 .vscode
+/frontend/src/data
+/frontend/src/modules/listOfFiles.json
+/frontend/src/modules/getListOfFiles.sh
