@@ -22,5 +22,9 @@ code {
 }
 
 .row {
-  margin: 0 20px 0 20px;
+  margin: 0 20px 30px 20px;
+}
+
+#root > div > header > div.form-outline.row.d-flex.justify-content-center {
+  margin-bottom: 5px
 }

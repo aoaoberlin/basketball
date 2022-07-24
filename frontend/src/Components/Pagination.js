@@ -47,13 +47,13 @@ const Pagination = ({ setPage, page, slice, range }) => {
 				{getPaginationGroup().map((item, index) =>
 					item > range.length ? null : (
 						<li
+							key={index}
 							className={
 								"page-item " + (page === item ? "active" : "")
 							}
 						>
 							<button
 								className="page-link"
-								key={index}
 								onClick={() => setPage(item)}
 							>
 								{item}
