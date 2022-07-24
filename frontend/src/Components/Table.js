@@ -31,7 +31,9 @@ const Table = () => {
 		const axios = require("axios");
 		const statsFromAPI = await axios
 			.get("http://localhost:5005/getStats")
-			.then((response) => response.data.stats)
+			.then((response) => {
+				console.log(response.data.stats);
+				return response.data.stats})
 			.catch((error) => console.log(error));
 		setStats(statsFromAPI);
 	};
@@ -151,9 +153,9 @@ const Table = () => {
 						{filteredSlice.map((player) => (
 							<tr key={player._id}>
 								<th scope="row">
-									{player.firstName + " " + player.lastName}
+									{player.name}
 								</th>
-								<td>{player.year}</td>
+								<td>{player.season}</td>
 								<td>{player.games}</td>
 								<td>{player.points}</td>
 								<td>{player.assists}</td>
