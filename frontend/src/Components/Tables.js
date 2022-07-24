@@ -34,10 +34,12 @@ const Tables = () => {
 
 	const filteredStats = !search
 		? stats
-		: stats.filter((s) =>
-				[s.firstName.toLowerCase(), s.lastName.toLowerCase()]
-					.join(" ")
-					.includes(search.toLowerCase())
+		: stats.filter(
+				(s) =>
+					[s.firstName.toLowerCase(), s.lastName.toLowerCase()]
+						.join(" ")
+						.includes(search.toLowerCase()) ||
+					String(s.year).includes(search.toLowerCase())
 		  );
 
 	if (!filteredStats) {
@@ -55,7 +57,7 @@ const Tables = () => {
 					type="search"
 					id="seach-input"
 					className="form-control"
-					placeholder="Search"
+					placeholder="Search for names or years"
 					aria-label="Search"
 					value={search}
 					onChange={handleSearchChange}
