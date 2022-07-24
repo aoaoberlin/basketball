@@ -8,6 +8,7 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
+		name: "ascending",
 		season: "ascending",
 		games: "descending",
 	});
@@ -30,45 +31,59 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 
 	const sortCategory = (e) => {
 		// console.log("inside TableSteals -> sortCategory");
-		const category = e.target.id;
+		const clickedCategory = e.target.id;
 		// console.log("category to be sorted:", category);
 		// console.log("stats until now:", stats);
-		if (order[category] === "descending") {
+		if (order[clickedCategory] === "descending") {
 			// console.log("order of category is descending");
-			const sortedStats = [...stats].sort(
-				(a, b) => b[category] - a[category]
-			);
+			let sortedStats;
+			if (clickedCategory === "name") {
+				sortedStats = [...stats].sort((a, b) =>
+					b[clickedCategory].localeCompare(a[clickedCategory])
+				);
+			} else {
+				sortedStats = [...stats].sort(
+					(a, b) => b[clickedCategory] - a[clickedCategory]
+				);
+			}
 			// console.log("sortedStats", sortedStats);
 
 			let orderClone = JSON.parse(JSON.stringify(order));
 			Object.keys(orderClone).forEach((key) =>
 				key === "games"
 					? (orderClone[key] = "descending")
-					: key === "season"
+					: key === "season" || key === "name"
 					? (orderClone[key] = "ascending")
 					: (orderClone[key] = "descending")
 			);
-			orderClone = { ...orderClone, [category]: "ascending" };
+			orderClone = { ...orderClone, [clickedCategory]: "ascending" };
 			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
 			setStats(sortedStats);
-		} else if (order[category] === "ascending") {
+		} else if (order[clickedCategory] === "ascending") {
 			// console.log("order of category is ascending");
-			const sortedStats = [...stats].sort(
-				(a, b) => a[category] - b[category]
-			);
+			let sortedStats;
+			if (clickedCategory === "name") {
+				sortedStats = [...stats].sort((a, b) =>
+					a[clickedCategory].localeCompare(b[clickedCategory])
+				);
+			} else {
+				sortedStats = [...stats].sort(
+					(a, b) => a[clickedCategory] - b[clickedCategory]
+				);
+			}
 			// console.log("sortedStats", sortedStats);
 
 			let orderClone = JSON.parse(JSON.stringify(order));
 			Object.keys(orderClone).forEach((key) =>
 				key === "games"
 					? (orderClone[key] = "descending")
-					: key === "season"
+					: key === "season" || key === "name"
 					? (orderClone[key] = "ascending")
 					: (orderClone[key] = "descending")
 			);
-			orderClone = { ...orderClone, [category]: "descending" };
+			orderClone = { ...orderClone, [clickedCategory]: "descending" };
 			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
@@ -88,7 +103,14 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 					<caption>{name}</caption>
 					<thead>
 						<tr>
-							<th scope="col">Player</th>
+							<th
+								scope="col"
+								className="th-pointer"
+								id="name"
+								onClick={sortCategory}
+							>
+								Player
+							</th>
 							<th
 								scope="col"
 								className="th-pointer"
