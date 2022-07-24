@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TableAssists from "./TableAssists";
 import TablePoints from "./TablePoints";
+import TableThreePointsMade from "./TableThreePointsMade";
+import TableAssists from "./TableAssists";
 import TableRebounds from "./TableRebounds";
 import TableSteals from "./TableSteals";
 import TableBlocks from "./TableBlocks";
@@ -77,6 +78,18 @@ const Tables = () => {
 				</div>
 				<div className="col-sm-6">
 					<div className="card">
+						<TableThreePointsMade
+							name="Three-Point Goals Made/Game"
+							fullStats={filteredStats}
+							category={"blocks"}
+							rowsPerPage={rowsPerPage}
+						/>
+					</div>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-sm-6">
+					<div className="card">
 						<TableAssists
 							name={"Assists/Game"}
 							fullStats={filteredStats}
@@ -85,8 +98,6 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
-			</div>
-			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<TableRebounds
@@ -97,6 +108,8 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
+			</div>
+			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<TableSteals
@@ -107,8 +120,6 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
-			</div>
-			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<TableBlocks

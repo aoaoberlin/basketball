@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
-	// console.log("inside TableSteals");
-	// console.log("inside TableSteals -> fullStats:", fullStats);
+const TableThreePointsMade = ({ name, fullStats, category, rowsPerPage }) => {
+	// console.log("inside TableThreePointsMade");
+	// console.log("inside TableThreePointsMade -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -14,13 +14,13 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	const [page, setPage] = useState(1);
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
-	// console.log("inside TableSteals -> stats", stats);
+	// console.log("inside TableThreePointsMade -> stats", stats);
 
 	useEffect(() => {
-		// console.log("inside TableSteals -> useEffect");
+		// console.log("inside TableThreePointsMade -> useEffect");
 		if (!stats || stats.length !== fullStats.length) {
-			// console.log("inside TableSteals -> no stats yet");
-			// console.log("inside TableSteals -> category:", category);
+			// console.log("inside TableThreePointsMade -> no stats yet");
+			// console.log("inside TableThreePointsMade -> category:", category);
 			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
@@ -29,7 +29,7 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	}, [stats, fullStats, category]);
 
 	const sortCategory = (e) => {
-		// console.log("inside TableSteals -> sortCategory");
+		// console.log("inside TableThreePointsMade -> sortCategory");
 		const category = e.target.id;
 		// console.log("category to be sorted:", category);
 		// console.log("stats until now:", stats);
@@ -77,7 +77,7 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	};
 
 	if (!stats) {
-		// console.log("inside TableSteals -> no data yet");
+		// console.log("inside TableThreePointsMade -> no data yet");
 		return;
 	} // no data yet
 
@@ -139,4 +139,4 @@ const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	);
 };
 
-export default TableSteals;
+export default TableThreePointsMade;

@@ -84,7 +84,8 @@ const TableBlocks = ({ name, fullStats, category, rowsPerPage }) => {
 	return (
 		<React.Fragment>
 			<div className="table-responsive-sm">
-				<table className="table table-hover table-striped">
+				<table className="table table-hover table-striped caption-top">
+					<caption>{name}</caption>
 					<thead>
 						<tr>
 							<th scope="col">Player</th>

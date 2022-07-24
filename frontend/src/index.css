@@ -28,3 +28,11 @@ code {
 #root > div > header > div.form-outline.row.d-flex.justify-content-center {
   margin-bottom: 5px
 }
+
+caption {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color:white;
+  background-color: black
+}
