@@ -8,7 +8,7 @@ const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
-		year: "ascending",
+		season: "ascending",
 		games: "descending",
 	});
 	const [page, setPage] = useState(1);
@@ -44,7 +44,7 @@ const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 			Object.keys(orderClone).forEach((key) =>
 				key === "games"
 					? (orderClone[key] = "descending")
-					: key === "year"
+					: key === "season"
 					? (orderClone[key] = "ascending")
 					: (orderClone[key] = "descending")
 			);
@@ -64,7 +64,7 @@ const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 			Object.keys(orderClone).forEach((key) =>
 				key === "games"
 					? (orderClone[key] = "descending")
-					: key === "year"
+					: key === "season"
 					? (orderClone[key] = "ascending")
 					: (orderClone[key] = "descending")
 			);
@@ -92,7 +92,7 @@ const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 							<th
 								scope="col"
 								className="th-pointer"
-								id="year"
+								id="season"
 								onClick={sortCategory}
 							>
 								Season
@@ -118,10 +118,8 @@ const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 					<tbody>
 						{slice.map((player) => (
 							<tr key={player._id}>
-								<th scope="row">
-									{player.firstName + " " + player.lastName}
-								</th>
-								<td>{player.year}</td>
+								<th scope="row">{player.name}</th>
+								<td>{player.season}</td>
 								<td>{player.games}</td>
 								<td>{player[category]}</td>
 							</tr>

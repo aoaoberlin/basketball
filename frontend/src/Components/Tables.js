@@ -38,10 +38,8 @@ const Tables = () => {
 		? stats
 		: stats.filter(
 				(s) =>
-					[s.firstName.toLowerCase(), s.lastName.toLowerCase()]
-						.join(" ")
-						.includes(search.toLowerCase()) ||
-					String(s.year).includes(search.toLowerCase())
+					s.name.toLowerCase().includes(search.toLowerCase()) ||
+					String(s.season).includes(search.toLowerCase())
 		  );
 
 	if (!filteredStats) {

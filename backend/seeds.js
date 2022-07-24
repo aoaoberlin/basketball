@@ -25,7 +25,7 @@ const statsData = stats.map((s) => {
 		blocks: s.blk,
 	};
 	const player = players.data.find((x) => x.id === properties.playerId);
-	properties.name = [player.firstName, player.lastName].join(" ");
+	properties.name = player.first_name + " " + player.last_name;
 	return properties;
 });
 
