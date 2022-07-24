@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const statsSchema = new Schema({
-	firstName: String,
-	lastName: String,
+	name: String,
 	playerId: Number,
-	year: Number,
+	season: Number,
 	games: Number,
 	points: Number,
-	rebounds: Number,
+	threePoints: Number,
 	assists: Number,
+	rebounds: Number,
 	steals: Number,
 	blocks: Number,
 });

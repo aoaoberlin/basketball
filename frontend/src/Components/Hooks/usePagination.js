@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const usePagination = (data, page, rowsPerPage) => {
-	console.log("inside usePagination");
+	// console.log("inside usePagination");
 	const [tableRange, setTableRange] = useState([]);
 	const [slice, setSlice] = useState([]);
 
 	useEffect(() => {
-		console.log("inside usePagination -> useEffect");
+		// console.log("inside usePagination -> useEffect");
 		const range = calculateRange(data, rowsPerPage);
 		setTableRange([...range]);
 
@@ -18,19 +18,19 @@ const usePagination = (data, page, rowsPerPage) => {
 };
 
 const calculateRange = (data, rowsPerPage) => {
-	console.log("inside usePagination -> calculateRange");
+	// console.log("inside usePagination -> calculateRange");
 	const range = [];
 	const num = Math.ceil(data.length / rowsPerPage);
 
 	for (let i = 1; i <= num; i++) {
 		range.push(i);
 	}
-	console.log("new range:", range);
+	// console.log("new range:", range);
 	return range;
 };
 
 const sliceData = (data, page, rowsPerPage) => {
-	console.log("inside usePagination -> sliceData");
+	// console.log("inside usePagination -> sliceData");
 	return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 };
 

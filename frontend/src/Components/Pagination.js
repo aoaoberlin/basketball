@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const Pagination = ({ setPage, page, slice, range }) => {
-	console.log("inside Pagination");
+	// console.log("inside Pagination");
 	const goToFirstPage = () => {
 		if (page > 1) setPage(1);
 	};
@@ -21,11 +21,13 @@ const Pagination = ({ setPage, page, slice, range }) => {
 	};
 
 	useEffect(() => {
-		console.log("inside Pagination -> useEffect");
+		// console.log("inside Pagination -> useEffect");
 		if (slice.length < 1 && page !== 1) {
 			setPage(page - 1);
 		}
 	}, [slice, page, setPage]);
+
+	if (range <= 1) return;
 
 	return (
 		<nav aria-label="Pagination">
@@ -45,13 +47,13 @@ const Pagination = ({ setPage, page, slice, range }) => {
 				{getPaginationGroup().map((item, index) =>
 					item > range.length ? null : (
 						<li
+							key={index}
 							className={
 								"page-item " + (page === item ? "active" : "")
 							}
 						>
 							<button
 								className="page-link"
-								key={index}
 								onClick={() => setPage(item)}
 							>
 								{item}

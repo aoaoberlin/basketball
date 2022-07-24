@@ -13,20 +13,19 @@ const players = require("../frontend/src/data/players.json");
 
 const statsData = stats.map((s) => {
 	const properties = {
-		firstName: "",
-		lastName: "",
+		name: "",
 		playerId: s.player_id,
-		year: s.season,
+		season: s.season,
 		games: s.games_played,
 		points: s.pts,
-		rebounds: s.reb,
+		threePoints: s.fg3m,
 		assists: s.ast,
+		rebounds: s.reb,
 		steals: s.stl,
 		blocks: s.blk,
 	};
 	const player = players.data.find((x) => x.id === properties.playerId);
-	properties.firstName = player.first_name;
-	properties.lastName = player.last_name;
+	properties.name = player.first_name + " " + player.last_name;
 	return properties;
 });
 
