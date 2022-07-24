@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableAssists = ({ name, filteredSlice, category }) => {
+const TableAssists = ({ name, fullStats, category }) => {
 	console.log("inside TableAssists");
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
@@ -10,19 +10,36 @@ const TableAssists = ({ name, filteredSlice, category }) => {
 		year: "ascending",
 		games: "descending",
 	});
+	const [page, setPage] = useState(1);
+	const rowsPerPage = 10;
+	const { slice, range } = usePagination(stats, page, rowsPerPage);
+	const [search, setNewSearch] = useState("");
 
 	useEffect(() => {
 		console.log("inside TableAssists -> useEffect");
 		if (!stats) {
 			console.log("inside TableAssists -> no stats yet");
 			console.log("inside TableAssists -> category:", category);
-			let sortedFilteredSlice = JSON.parse(JSON.stringify(filteredSlice));
-			sortedFilteredSlice.sort((a, b) => b[category] - a[category]);
-			setStats(sortedFilteredSlice);
+			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
+			sortedFullStats.sort((a, b) => b[category] - a[category]);
+			setStats(sortedFullStats);
 		}
-	}, [stats, filteredSlice, category]);
+	}, [stats, fullStats, category]);
 
-	if (!stats) {
+	const handleSearchChange = (e) => {
+		console.log("inside Table -> handleSearchChange");
+		setNewSearch(e.target.value);
+	};
+
+	const filteredSlice = !search
+		? slice
+		: slice.filter(
+				(s) =>
+					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
+					s.lastName.toLowerCase().includes(search.toLowerCase())
+		  );
+
+		  if (!fullStats) {
 		console.log("inside TableAssists -> no data yet");
 		return;
 	} // no data yet
@@ -53,7 +70,7 @@ const TableAssists = ({ name, filteredSlice, category }) => {
 
 	return (
 		<React.Fragment>
-			{/* <div className="form-outline row d-flex justify-content-center">
+			<div className="form-outline row d-flex justify-content-center">
 				<input
 					type="search"
 					id="seach-input"
@@ -63,7 +80,7 @@ const TableAssists = ({ name, filteredSlice, category }) => {
 					value={search}
 					onChange={handleSearchChange}
 				/>
-			</div> */}
+			</div>
 			<div className="table-responsive-sm">
 				<table className="table table-hover table-striped">
 					<thead>
@@ -96,8 +113,7 @@ const TableAssists = ({ name, filteredSlice, category }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{stats
-							// .sort((a, b) => b[category] - a[category])
+						{filteredSlice
 							.map((player) => (
 								<tr key={player._id}>
 									<th scope="row">
@@ -112,12 +128,12 @@ const TableAssists = ({ name, filteredSlice, category }) => {
 							))}
 					</tbody>
 				</table>
-				{/* <Pagination
+				<Pagination
 					slice={slice}
 					setPage={setPage}
 					page={page}
 					range={range}
-				/> */}
+				/>
 			</div>
 		</React.Fragment>
 	);

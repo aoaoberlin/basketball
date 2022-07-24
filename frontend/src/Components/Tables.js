@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from "react";
-import usePagination from "./Hooks/usePagination";
-import Pagination from "./Pagination";
 import TableAssists from "./TableAssists";
 import TablePoints from "./TablePoints";
+import TableRebounds from "./TableRebounds";
+import TableSteals from "./TableSteals";
+import TableBlocks from "./TableBlocks";
 
 const Tables = () => {
 	console.log("inside Table");
-	const rowsPerPage = 10;
 	const [stats, setStats] = useState("");
-	const [order, setOrder] = useState({
-		points: "descending",
-		assists: "descending",
-		rebounds: "descending",
-		steals: "descending",
-		blocks: "descending",
-		year: "ascending",
-		games: "descending",
-	});
-	const [page, setPage] = useState(1);
-	const { slice, range } = usePagination(stats, page, rowsPerPage);
-	const [search, setNewSearch] = useState("");
 
 	useEffect(() => {
 		console.log("inside Table -> useEffect");
@@ -38,79 +26,37 @@ const Tables = () => {
 		setStats(statsFromAPI);
 	};
 
-	const handleSearchChange = (e) => {
-		console.log("inside Table -> handleSearchChange");
-		setNewSearch(e.target.value);
-	};
-
-	const filteredSlice = !search
-		? slice
-		: slice.filter(
-				(s) =>
-					s.firstName.toLowerCase().includes(search.toLowerCase()) ||
-					s.lastName.toLowerCase().includes(search.toLowerCase())
-		  );
-
-	if (filteredSlice.length === 0) {
+	if (!stats) {
 		console.log("inside Table -> no data yet");
 		return;
 	} // no data yet
 
 	return (
 		<React.Fragment>
-			<div className="form-outline row d-flex justify-content-center">
-				<input
-					type="search"
-					id="seach-input"
-					className="form-control"
-					placeholder="Search"
-					aria-label="Search"
-					value={search}
-					onChange={handleSearchChange}
-				/>
-			</div>
-			{/* {/* <TablePoints
+			<TablePoints
 				name={"Points/Game"}
-				filteredSlice={filteredSlice}
+				fullStats={stats}
 				category={"points"}
-			/> */}
+			/>
 			<TableAssists
 				name={"Assists/Game"}
-				filteredSlice={filteredSlice}
+				fullStats={stats}
 				category={"assists"}
 			/>
 			{/* <TableRebounds
 				name="Rebounds/Game"
-				filteredSlice={filteredSlice.map((f) => ({
-					name: f.firstName + " " + f.lastName,
-					year: f.year,
-					games: f.games,
-					stats: f.rebounds,
-				}))}
+				fullStats={stats}
+				category={"rebounds"}
 			/>
 			<TableSteals
 				name="Steals/Game"
-				filteredSlice={filteredSlice.map((f) => ({
-					name: f.firstName + " " + f.lastName,
-					year: f.year,
-					games: f.games,
-					stats: f.steals,
-				}))}
+				fullStats={stats}
+				category={"steals"}
 			/>
 			<TableBlocks
 				name="Blocks/Game"
-				filteredSlice={filteredSlice.map((f) => ({
-					name: f.firstName + " " + f.lastName,
-					year: f.year,
-					games: f.games,
-					stats: f.blocks,
-				}))}
-			/> */}
-			{/* <Pagination
-				slice={slice}
-				setPage={setPage}
-				page={page}
-				range={range}
+				fullStats={stats}
+				category={"blocks"}
 			/> */}
 		</React.Fragment>
 	);
