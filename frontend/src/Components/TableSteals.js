@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableSteals = ({ name, fullStats, category }) => {
+const TableSteals = ({ name, fullStats, category, rowsPerPage }) => {
 	// console.log("inside TableSteals");
 	// console.log("inside TableSteals -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
@@ -12,7 +12,6 @@ const TableSteals = ({ name, fullStats, category }) => {
 		games: "descending",
 	});
 	const [page, setPage] = useState(1);
-	const rowsPerPage = 10;
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
 	// console.log("inside TableSteals -> stats", stats);

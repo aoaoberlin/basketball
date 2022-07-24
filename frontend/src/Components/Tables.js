@@ -9,6 +9,7 @@ const Tables = () => {
 	// console.log("inside Table");
 	const [stats, setStats] = useState("");
 	const [search, setSearch] = useState("");
+	const rowsPerPage = 10;
 
 	useEffect(() => {
 		// console.log("inside Table -> useEffect");
@@ -63,53 +64,58 @@ const Tables = () => {
 					onChange={handleSearchChange}
 				/>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
+			<div className="row">
+				<div className="col-sm-6">
+					<div className="card">
 						<TablePoints
 							name={"Points/Game"}
 							fullStats={filteredStats}
 							category={"points"}
+							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="card">
+				<div className="col-sm-6">
+					<div className="card">
 						<TableAssists
 							name={"Assists/Game"}
 							fullStats={filteredStats}
 							category={"assists"}
+							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
+			<div className="row">
+				<div className="col-sm-6">
+					<div className="card">
 						<TableRebounds
 							name="Rebounds/Game"
 							fullStats={filteredStats}
 							category={"rebounds"}
+							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="card">
+				<div className="col-sm-6">
+					<div className="card">
 						<TableSteals
 							name="Steals/Game"
 							fullStats={filteredStats}
 							category={"steals"}
+							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
+			<div className="row">
+				<div className="col-sm-6">
+					<div className="card">
 						<TableBlocks
 							name="Blocks/Game"
 							fullStats={filteredStats}
 							category={"blocks"}
+							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>

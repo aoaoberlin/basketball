@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableAssists = ({ name, fullStats, category }) => {
+const TableAssists = ({ name, fullStats, category, rowsPerPage }) => {
 	// console.log("inside TableAssists");
 	// console.log("inside TableAssists -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
@@ -12,7 +12,6 @@ const TableAssists = ({ name, fullStats, category }) => {
 		games: "descending",
 	});
 	const [page, setPage] = useState(1);
-	const rowsPerPage = 10;
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
 	// console.log("inside TableAssists -> stats", stats);
