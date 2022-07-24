@@ -39,7 +39,7 @@ const Tables = () => {
 		: stats.filter(
 				(s) =>
 					s.name.toLowerCase().includes(search.toLowerCase()) ||
-					String(s.season).includes(search.toLowerCase())
+					String(s.season).includes(search)
 		  );
 
 	if (!filteredStats) {
@@ -79,7 +79,7 @@ const Tables = () => {
 						<TableThreePointsMade
 							name="Three-Point Goals Made/Game"
 							fullStats={filteredStats}
-							category={"blocks"}
+							category={"threePoints"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
