@@ -1,10 +1,10 @@
 const importAllStats = () => {
-	const firstYear = 1983;
+	const firstYear = 1979;
 	const lastYear = 2021;
 	let stats = [];
 
 	for (let year = firstYear; year <= lastYear; year++) {
-		const yStats = require(`./api/stats/stats${year}`);
+		const yStats = require(`../data/stats/stats${year}`);
 		stats.push(yStats.data);
 	}
 	return stats;
@@ -20,7 +20,7 @@ const saveStats = (stats) => {
 	const fs = require("fs");
 
 	fs.writeFile(
-		`./api/stats/stats.json`,
+		`../data/stats/stats.json`,
 		JSON.stringify(stats),
 		function (err) {
 			if (err) throw err;
