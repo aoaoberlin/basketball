@@ -19,6 +19,7 @@ app.get("/api/getStats", (req, res) => {
 });
 
 app.use((req, res, next) => {
+	console.log("----->>> GET / (home) ");
 	res.sendFile(__dirname + "/public/index.html");
 });
 

@@ -1,8 +1,9 @@
 /node_modules
-/backend/.env
-.vscode
 /src/data
 /src/modules/listOfFiles.json
 /src/modules/getListOfFiles.sh
-/.env.production
-/.env.development
+.env
+.env.production
+.env.development
+.vscode
+seeds.js
