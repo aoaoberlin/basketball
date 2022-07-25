@@ -29,7 +29,7 @@ app.get("/api/getStats", (req, res) => {
 	console.log("----->>> GET /api/getStats called: ");
 	Stats.find()
 		.then((stats) => res.json({ stats }))
-		.catch((err) => next(err));
+		.catch((err) => console.log(err));
 });
 
 module.exports = app;
