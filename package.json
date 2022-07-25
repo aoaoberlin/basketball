@@ -1,0 +1,9 @@
+{
+  "name": "basketball",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "heroku-prebuild": "cd frontend && npm install && cd ../backend && npm install"
+  }
+}
