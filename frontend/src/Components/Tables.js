@@ -44,10 +44,13 @@ const Tables = () => {
 
 	if (!filteredStats) {
 		// console.log("inside Table -> no data yet");
-		return;
-	} // no data yet
+		return (
+			<h2 className="text-center" id="h2-loading-data">
+				LOADING DATA...
+			</h2>
+		);
+	}
 
-	// console.log("search:", search);
 	// console.log("filteredStats:", filteredStats);
 
 	return (

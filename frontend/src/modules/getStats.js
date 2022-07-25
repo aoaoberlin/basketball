@@ -46,7 +46,8 @@ const getAndSaveStats = (playersIDs, page, year) => {
 			return;
 		})
 		.catch((error) => {
-			console.log(error);
+			// console.log(error);
+			console.log(`error downloading stats${year}page${page}.json`);
 		});
 };
 
@@ -56,6 +57,6 @@ for (let year = 1979; year <= 2021; year++) {
 		if (!isDownloaded(listOfFiles, year, page)) {
 			const playersIDs = getPlayersIDs(page);
 			getAndSaveStats(playersIDs, page, year);
-		} else console.log(`year ${year} page ${page} not downloaded. Why?`);
+		}
 	}
 }
