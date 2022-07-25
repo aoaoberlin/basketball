@@ -6,3 +6,5 @@
 /frontend/src/data
 /frontend/src/modules/listOfFiles.json
 /frontend/src/modules/getListOfFiles.sh
+/frontend/.env.production
+/frontend/.env.development

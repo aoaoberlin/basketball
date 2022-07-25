@@ -21,12 +21,12 @@ require("./config")(app);
 // 		}),
 // 	})
 // );
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
 	res.send("hello world");
 });
 
-app.get("/getStats", (req, res) => {
-	console.log("----->>> GET /getStats called: ");
+app.get("/api/getStats", (req, res) => {
+	console.log("----->>> GET /api/getStats called: ");
 	Stats.find()
 		.then((stats) => res.json({ stats }))
 		.catch((err) => next(err));
