@@ -23,7 +23,7 @@ const Tables = () => {
 		// console.log("inside Table -> getStats");
 		const axios = require("axios");
 		const statsFromAPI = await axios
-			.get("http://localhost:5005/getStats")
+			.get(`${process.env.REACT_APP_API_URL}/getStats`)
 			.then((response) => response.data.stats)
 			.catch((error) => console.log(error));
 		setStats(statsFromAPI);
@@ -44,10 +44,13 @@ const Tables = () => {
 
 	if (!filteredStats) {
 		// console.log("inside Table -> no data yet");
-		return;
-	} // no data yet
+		return (
+			<h2 className="text-center" id="h2-loading-data">
+				LOADING DATA...
+			</h2>
+		);
+	}
 
-	// console.log("search:", search);
 	// console.log("filteredStats:", filteredStats);
 
 	return (

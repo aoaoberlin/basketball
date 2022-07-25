@@ -9,7 +9,7 @@ mongoose.connect(MONGO_URI, {
 
 const Stats = require("./models/Stats.model");
 const stats = require("../frontend/src/data/stats/stats.json");
-const players = require("../frontend/src/data/players.json");
+const players = require("../frontend/src/data/players/players.json");
 
 const statsData = stats.map((s) => {
 	const properties = {
@@ -24,7 +24,7 @@ const statsData = stats.map((s) => {
 		steals: s.stl,
 		blocks: s.blk,
 	};
-	const player = players.data.find((x) => x.id === properties.playerId);
+	const player = players.find((x) => x.id === properties.playerId);
 	properties.name = player.first_name + " " + player.last_name;
 	return properties;
 });
