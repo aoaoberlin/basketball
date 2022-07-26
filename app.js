@@ -30,10 +30,11 @@ const sort = {
 };
 const limit = 500;
 
-app.get("/api/getStats", (req, res) => {
+app.get("/api/getStats/:category", (req, res) => {
 	console.log("----->>> GET /api/getStats called: ");
-	Stats.find(filter, projection.points)
-		.sort(sort.points)
+	const { category } = req.params;
+	Stats.find(filter, projection[category])
+		.sort(sort[category])
 		.limit(limit)
 		.then((stats) => res.json({ stats }))
 		.catch((err) => console.log(err));

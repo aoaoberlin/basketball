@@ -20,7 +20,7 @@ const Tables = () => {
 	const getStats = async () => {
 		const axios = require("axios");
 		const statsFromAPI = await axios
-			.get(`${process.env.REACT_APP_API_URL}/getStats`)
+			.get(`${process.env.REACT_APP_API_URL}/getStats/points`)
 			.then((response) => response.data.stats)
 			.catch((error) => console.log(error));
 		setStats(statsFromAPI);
