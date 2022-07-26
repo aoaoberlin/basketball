@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import usePagination from "./Hooks/usePagination";
+import usePagination from "../hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableBlocks = ({ name, fullStats, category, rowsPerPage }) => {
+const TableBlocks = ({ name, fullStats, category, header, rowsPerPage }) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -19,7 +19,7 @@ const TableBlocks = ({ name, fullStats, category, rowsPerPage }) => {
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
 
-			// brings page back to 1  after searching for a player
+			// brings page back to 1 after searching for a player
 			setPage(1);
 
 			// resets order settings after searching for a player
@@ -116,7 +116,7 @@ const TableBlocks = ({ name, fullStats, category, rowsPerPage }) => {
 								id="games"
 								onClick={sortCategory}
 							>
-								Games played
+								Games
 							</th>
 							<th
 								scope="col"
@@ -124,7 +124,7 @@ const TableBlocks = ({ name, fullStats, category, rowsPerPage }) => {
 								id={category}
 								onClick={sortCategory}
 							>
-								{name}
+								{header}
 							</th>
 						</tr>
 					</thead>

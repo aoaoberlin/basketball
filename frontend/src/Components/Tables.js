@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import TablePoints from "./TablePoints";
 import TableThreePointsMade from "./TableThreePointsMade";
 import TableAssists from "./TableAssists";
@@ -47,7 +47,7 @@ const Tables = () => {
 	}
 
 	return (
-		<React.Fragment>
+		<div className="container-fluid text-responsive">
 			<div className="form-outline row d-flex justify-content-center">
 				<input
 					type="search"
@@ -63,9 +63,10 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TablePoints
-							name={"Points/Game"}
+							name={"Points"}
 							fullStats={filteredStats}
 							category={"points"}
+							header={"PTS"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
@@ -73,9 +74,10 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TableThreePointsMade
-							name="Three-Point Goals Made/Game"
+							name="Three-Point Goals Made"
 							fullStats={filteredStats}
 							category={"threePoints"}
+							header={"3FGM"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
@@ -85,9 +87,10 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TableAssists
-							name={"Assists/Game"}
+							name={"Assists"}
 							fullStats={filteredStats}
 							category={"assists"}
+							header={"AST"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
@@ -95,9 +98,10 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TableRebounds
-							name="Rebounds/Game"
+							name="Rebounds"
 							fullStats={filteredStats}
 							category={"rebounds"}
+							header={"REB"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
@@ -107,9 +111,10 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TableSteals
-							name="Steals/Game"
+							name="Steals"
 							fullStats={filteredStats}
 							category={"steals"}
+							header={"STL"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
@@ -117,15 +122,16 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<TableBlocks
-							name="Blocks/Game"
+							name="Blocks"
 							fullStats={filteredStats}
 							category={"blocks"}
+							header={"BLK"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>
 				</div>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 
