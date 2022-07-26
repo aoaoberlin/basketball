@@ -7,20 +7,17 @@ import TableSteals from "./TableSteals";
 import TableBlocks from "./TableBlocks";
 
 const Tables = () => {
-	// console.log("inside Table");
 	const [stats, setStats] = useState("");
 	const [search, setSearch] = useState("");
 	const rowsPerPage = 10;
 
 	useEffect(() => {
-		// console.log("inside Table -> useEffect");
 		if (!stats) {
 			getStats();
 		}
 	});
 
 	const getStats = async () => {
-		// console.log("inside Table -> getStats");
 		const axios = require("axios");
 		const statsFromAPI = await axios
 			.get(`${process.env.REACT_APP_API_URL}/getStats`)
@@ -30,7 +27,6 @@ const Tables = () => {
 	};
 
 	const handleSearchChange = (e) => {
-		// console.log("inside Table -> handleSearchChange");
 		setSearch(e.target.value);
 	};
 
@@ -43,15 +39,12 @@ const Tables = () => {
 		  );
 
 	if (!filteredStats) {
-		// console.log("inside Table -> no data yet");
 		return (
 			<h2 className="text-center" id="h2-loading-data">
 				LOADING DATA...
 			</h2>
 		);
 	}
-
-	// console.log("filteredStats:", filteredStats);
 
 	return (
 		<React.Fragment>

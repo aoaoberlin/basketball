@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 const Pagination = ({ setPage, page, slice, range }) => {
-	// console.log("inside Pagination");
 	const goToFirstPage = () => {
 		if (page > 1) setPage(1);
 	};
@@ -21,7 +20,6 @@ const Pagination = ({ setPage, page, slice, range }) => {
 	};
 
 	useEffect(() => {
-		// console.log("inside Pagination -> useEffect");
 		if (slice.length < 1 && page !== 1) {
 			setPage(page - 1);
 		}

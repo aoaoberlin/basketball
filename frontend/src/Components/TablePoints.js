@@ -3,8 +3,6 @@ import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pagination";
 
 const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
-	// console.log("inside TablePoints");
-	// console.log("inside TablePoints -> fullStats:", fullStats);
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -15,13 +13,8 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 	const [page, setPage] = useState(1);
 	const { slice, range } = usePagination(stats, page, rowsPerPage);
 
-	// console.log("inside TablePoints -> stats", stats);
-
 	useEffect(() => {
-		// console.log("inside TablePoints -> useEffect");
 		if (!stats || stats.length !== fullStats.length) {
-			// console.log("inside TablePoints -> no stats yet");
-			// console.log("inside TablePoints -> category:", category);
 			let sortedFullStats = JSON.parse(JSON.stringify(fullStats));
 			sortedFullStats.sort((a, b) => b[category] - a[category]);
 			setStats(sortedFullStats);
@@ -40,12 +33,8 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 	}, [stats, fullStats, category]);
 
 	const sortCategory = (e) => {
-		// console.log("inside TablePoints -> sortCategory");
 		const clickedCategory = e.target.id;
-		// console.log("category to be sorted:", category);
-		// console.log("stats until now:", stats);
 		if (order[clickedCategory] === "descending") {
-			// console.log("order of category is descending");
 			let sortedStats;
 			if (clickedCategory === "name") {
 				sortedStats = [...stats].sort((a, b) =>
@@ -56,7 +45,6 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 					(a, b) => b[clickedCategory] - a[clickedCategory]
 				);
 			}
-			// console.log("sortedStats", sortedStats);
 
 			let orderClone = JSON.parse(JSON.stringify(order));
 			Object.keys(orderClone).forEach((key) =>
@@ -67,12 +55,10 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 					: (orderClone[key] = "descending")
 			);
 			orderClone = { ...orderClone, [clickedCategory]: "ascending" };
-			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
 			setStats(sortedStats);
 		} else if (order[clickedCategory] === "ascending") {
-			// console.log("order of category is ascending");
 			let sortedStats;
 			if (clickedCategory === "name") {
 				sortedStats = [...stats].sort((a, b) =>
@@ -83,7 +69,6 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 					(a, b) => a[clickedCategory] - b[clickedCategory]
 				);
 			}
-			// console.log("sortedStats", sortedStats);
 
 			let orderClone = JSON.parse(JSON.stringify(order));
 			Object.keys(orderClone).forEach((key) =>
@@ -94,17 +79,13 @@ const TablePoints = ({ name, fullStats, category, rowsPerPage }) => {
 					: (orderClone[key] = "descending")
 			);
 			orderClone = { ...orderClone, [clickedCategory]: "descending" };
-			// console.log("orderClone", orderClone);
 
 			setOrder(orderClone);
 			setStats(sortedStats);
 		}
 	};
 
-	if (!stats) {
-		// console.log("inside TablePoints -> no data yet");
-		return;
-	} // no data yet
+	if (!stats) return;
 
 	return (
 		<React.Fragment>
