@@ -4,14 +4,14 @@
 
 /* Search input */
 .form-control {
-  margin: 20px 0 15px 0;
+  margin-bottom: 15px;
   width: calc(40% + 1vw + 1vh);
 }
 
 @media screen and (max-width: 600px) {
   /* Search input */
   .form-control {
-    margin: 20px 0 15px 0;
+    margin-bottom: 15px;
     width: calc(80% + 1vw + 1vh);
   }
 }
