@@ -32,6 +32,10 @@ caption {
   margin: 30px 0 30px 0;
 }
 
+.card {
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 1200px) {
   .text-responsive {
     font-size: calc(30% + 0.5vw + 0.5vh);
