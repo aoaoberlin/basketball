@@ -11,9 +11,30 @@ app.get("/api/", (req, res) => {
 	res.send("hello world");
 });
 
+const filter = { games: { $gte: 10 } };
+const projection = {
+	points: { name: 1, season: 1, games: 1, points: 1 },
+	threePoints: { name: 1, season: 1, games: 1, threePoints: 1 },
+	assists: { name: 1, season: 1, games: 1, assists: 1 },
+	rebounds: { name: 1, season: 1, games: 1, rebounds: 1 },
+	steals: { name: 1, season: 1, games: 1, steals: 1 },
+	blocks: { name: 1, season: 1, games: 1, blocks: 1 },
+};
+const sort = {
+	points: { points: -1 },
+	threePoints: { threePoints: -1 },
+	assists: { assists: -1 },
+	rebounds: { rebounds: -1 },
+	steals: { steals: -1 },
+	blocks: { blocks: -1 },
+};
+const limit = 500;
+
 app.get("/api/getStats", (req, res) => {
 	console.log("----->>> GET /api/getStats called: ");
-	Stats.find()
+	Stats.find(filter, projection.points)
+		.sort(sort.points)
+		.limit(limit)
 		.then((stats) => res.json({ stats }))
 		.catch((err) => console.log(err));
 });
