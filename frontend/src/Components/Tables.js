@@ -12,18 +12,28 @@ const Tables = () => {
 	const rowsPerPage = 10;
 
 	useEffect(() => {
-		if (!stats) {
-			getStats();
+		if (stats.length === 0) {
+			getAllStats();
 		}
 	});
 
-	const getStats = async () => {
+	const getAllStats = async () => {
+		let statsFromAPI = [];
+		statsFromAPI.push(await getSpecificStats("points"));
+		statsFromAPI.push(await getSpecificStats("threePoints"));
+		statsFromAPI.push(await getSpecificStats("assists"));
+		statsFromAPI.push(await getSpecificStats("rebounds"));
+		statsFromAPI.push(await getSpecificStats("steals"));
+		statsFromAPI.push(await getSpecificStats("blocks"));
+		setStats(statsFromAPI);
+	};
+
+	const getSpecificStats = (category) => {
 		const axios = require("axios");
-		const statsFromAPI = await axios
-			.get(`${process.env.REACT_APP_API_URL}/getStats/points`)
+		return axios
+			.get(`${process.env.REACT_APP_API_URL}/getStats/${category}`)
 			.then((response) => response.data.stats)
 			.catch((error) => console.log(error));
-		setStats(statsFromAPI);
 	};
 
 	const handleSearchChange = (e) => {
@@ -32,13 +42,15 @@ const Tables = () => {
 
 	const filteredStats = !search
 		? stats
-		: stats.filter(
-				(s) =>
-					s.name.toLowerCase().includes(search.toLowerCase()) ||
-					String(s.season).includes(search)
-		  );
+		: stats
+				.map((s) => s)
+				.filter(
+					(s) =>
+						s.name.toLowerCase().includes(search.toLowerCase()) ||
+						String(s.season).includes(search)
+				);
 
-	if (!filteredStats) {
+	if (filteredStats.length === 0) {
 		return (
 			<h2 className="text-center" id="h2-loading-data">
 				LOADING DATA...
@@ -64,7 +76,7 @@ const Tables = () => {
 					<div className="card">
 						<TablePoints
 							name={"Points"}
-							fullStats={filteredStats}
+							fullStats={filteredStats[0]}
 							category={"points"}
 							header={"PTS"}
 							rowsPerPage={rowsPerPage}
@@ -75,7 +87,7 @@ const Tables = () => {
 					<div className="card">
 						<TableThreePointsMade
 							name="Three-Point Goals Made"
-							fullStats={filteredStats}
+							fullStats={filteredStats[1]}
 							category={"threePoints"}
 							header={"3FGM"}
 							rowsPerPage={rowsPerPage}
@@ -88,7 +100,7 @@ const Tables = () => {
 					<div className="card">
 						<TableAssists
 							name={"Assists"}
-							fullStats={filteredStats}
+							fullStats={filteredStats[2]}
 							category={"assists"}
 							header={"AST"}
 							rowsPerPage={rowsPerPage}
@@ -99,7 +111,7 @@ const Tables = () => {
 					<div className="card">
 						<TableRebounds
 							name="Rebounds"
-							fullStats={filteredStats}
+							fullStats={filteredStats[3]}
 							category={"rebounds"}
 							header={"REB"}
 							rowsPerPage={rowsPerPage}
@@ -112,7 +124,7 @@ const Tables = () => {
 					<div className="card">
 						<TableSteals
 							name="Steals"
-							fullStats={filteredStats}
+							fullStats={filteredStats[4]}
 							category={"steals"}
 							header={"STL"}
 							rowsPerPage={rowsPerPage}
@@ -123,7 +135,7 @@ const Tables = () => {
 					<div className="card">
 						<TableBlocks
 							name="Blocks"
-							fullStats={filteredStats}
+							fullStats={filteredStats[5]}
 							category={"blocks"}
 							header={"BLK"}
 							rowsPerPage={rowsPerPage}
