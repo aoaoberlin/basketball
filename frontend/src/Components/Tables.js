@@ -42,19 +42,22 @@ const Tables = () => {
 
 	const filteredStats = !search
 		? stats
-		: stats
-				.map((s) => s)
-				.filter(
+		: stats.map((s) =>
+				s.filter(
 					(s) =>
 						s.name.toLowerCase().includes(search.toLowerCase()) ||
 						String(s.season).includes(search)
-				);
+				)
+		  );
 
 	if (filteredStats.length === 0) {
 		return (
-			<h2 className="text-center" id="h2-loading-data">
-				LOADING DATA...
-			</h2>
+			<div className="d-flex justify-content-center">
+				<div
+					className="spinner-border text-primary"
+					role="status"
+				></div>
+			</div>
 		);
 	}
 
