@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import TablePoints from "./TablePoints";
-import TableThreePointsMade from "./TableThreePointsMade";
-import TableAssists from "./TableAssists";
-import TableRebounds from "./TableRebounds";
-import TableSteals from "./TableSteals";
-import TableBlocks from "./TableBlocks";
+import SubTable from "./SubTable";
 
 const Tables = () => {
 	const [stats, setStats] = useState("");
@@ -77,7 +72,7 @@ const Tables = () => {
 			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
-						<TablePoints
+						<SubTable
 							name={"Points"}
 							fullStats={filteredStats[0]}
 							category={"points"}
@@ -88,7 +83,7 @@ const Tables = () => {
 				</div>
 				<div className="col-sm-6">
 					<div className="card">
-						<TableThreePointsMade
+						<SubTable
 							name="Three-Point Goals Made"
 							fullStats={filteredStats[1]}
 							category={"threePoints"}
@@ -101,7 +96,7 @@ const Tables = () => {
 			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
-						<TableAssists
+						<SubTable
 							name={"Assists"}
 							fullStats={filteredStats[2]}
 							category={"assists"}
@@ -112,7 +107,7 @@ const Tables = () => {
 				</div>
 				<div className="col-sm-6">
 					<div className="card">
-						<TableRebounds
+						<SubTable
 							name="Rebounds"
 							fullStats={filteredStats[3]}
 							category={"rebounds"}
@@ -125,7 +120,7 @@ const Tables = () => {
 			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
-						<TableSteals
+						<SubTable
 							name="Steals"
 							fullStats={filteredStats[4]}
 							category={"steals"}
@@ -136,7 +131,7 @@ const Tables = () => {
 				</div>
 				<div className="col-sm-6">
 					<div className="card">
-						<TableBlocks
+						<SubTable
 							name="Blocks"
 							fullStats={filteredStats[5]}
 							category={"blocks"}
