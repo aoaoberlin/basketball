@@ -19,16 +19,16 @@ const Tables = () => {
 
 	const getAllStats = async () => {
 		let statsFromAPI = [];
-		statsFromAPI.push(await getSpecificStats("points"));
-		statsFromAPI.push(await getSpecificStats("threePoints"));
-		statsFromAPI.push(await getSpecificStats("assists"));
-		statsFromAPI.push(await getSpecificStats("rebounds"));
-		statsFromAPI.push(await getSpecificStats("steals"));
-		statsFromAPI.push(await getSpecificStats("blocks"));
+		statsFromAPI.push(await getCategoryStats("points"));
+		statsFromAPI.push(await getCategoryStats("threePoints"));
+		statsFromAPI.push(await getCategoryStats("assists"));
+		statsFromAPI.push(await getCategoryStats("rebounds"));
+		statsFromAPI.push(await getCategoryStats("steals"));
+		statsFromAPI.push(await getCategoryStats("blocks"));
 		setStats(statsFromAPI);
 	};
 
-	const getSpecificStats = (category) => {
+	const getCategoryStats = (category) => {
 		const axios = require("axios");
 		return axios
 			.get(`${process.env.REACT_APP_API_URL}/getStats/${category}`)

@@ -86,65 +86,63 @@ const TableBlocks = ({ name, fullStats, category, header, rowsPerPage }) => {
 	if (!stats) return;
 
 	return (
-		<React.Fragment>
-			<div className="table-responsive-sm">
-				<table className="table table-hover table-striped caption-top">
-					<caption>{name}</caption>
-					<thead>
-						<tr>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="name"
-								onClick={sortCategory}
-							>
-								Player
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="season"
-								onClick={sortCategory}
-							>
-								Season
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id="games"
-								onClick={sortCategory}
-							>
-								Games
-							</th>
-							<th
-								scope="col"
-								className="th-pointer"
-								id={category}
-								onClick={sortCategory}
-							>
-								{header}
-							</th>
+		<div className="table-responsive-sm">
+			<table className="table table-hover table-striped caption-top">
+				<caption>{name}</caption>
+				<thead>
+					<tr>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="name"
+							onClick={sortCategory}
+						>
+							Player
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="season"
+							onClick={sortCategory}
+						>
+							Season
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id="games"
+							onClick={sortCategory}
+						>
+							Games
+						</th>
+						<th
+							scope="col"
+							className="th-pointer"
+							id={category}
+							onClick={sortCategory}
+						>
+							{header}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{slice.map((player) => (
+						<tr key={player._id}>
+							<th scope="row">{player.name}</th>
+							<td>{player.season}</td>
+							<td>{player.games}</td>
+							<td>{player[category]}</td>
 						</tr>
-					</thead>
-					<tbody>
-						{slice.map((player) => (
-							<tr key={player._id}>
-								<th scope="row">{player.name}</th>
-								<td>{player.season}</td>
-								<td>{player.games}</td>
-								<td>{player[category]}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-				<Pagination
-					slice={slice}
-					setPage={setPage}
-					page={page}
-					range={range}
-				/>
-			</div>
-		</React.Fragment>
+					))}
+				</tbody>
+			</table>
+			<Pagination
+				slice={slice}
+				setPage={setPage}
+				page={page}
+				range={range}
+			/>
+		</div>
 	);
 };
 

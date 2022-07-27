@@ -1,5 +1,6 @@
-.th-pointer {
-  cursor: pointer;
+/* Loading spinner */
+.spinner-border {
+  margin-top: 15px;
 }
 
 /* Search input */
@@ -8,38 +9,89 @@
   width: calc(40% + 1vw + 1vh);
 }
 
+/* Search input */
 @media screen and (max-width: 600px) {
-  /* Search input */
   .form-control {
     margin-bottom: 15px;
     width: calc(80% + 1vw + 1vh);
   }
 }
 
-#root > div > header > div.form-outline.row.d-flex.justify-content-center {
-  margin-bottom: 5px
-}
-
+/* Table caption */
 caption {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color:white;
+  color: white;
   background-color: black
 }
 
-.card {
-  margin-bottom: 15px;
+/* Table header */
+.th-pointer {
+  cursor: pointer;
 }
 
+/* Table font size */
 @media screen and (max-width: 1200px) {
   .text-responsive {
     font-size: calc(30% + 0.5vw + 0.5vh);
   }
 }
 
+/* Table font size */
 @media screen and (max-width: 575px) {
   .text-responsive {
     font-size: calc(50% + 0.5vw + 0.5vh);
+  }
+}
+
+/* Each table */
+.card {
+  margin-bottom: 15px;
+}
+
+/* Table columns */
+#name {
+  width: 33%;
+}
+
+#season {
+  width: 17%;
+}
+
+#games {
+  width: 17%;
+}
+
+#points,
+#threePoints,
+#assists,
+#rebounds,
+#steals,
+#blocks {
+  width: 14.5%;
+}
+
+/* Table columns */
+@media screen and (max-width: 575px) {
+  #name {
+    width: 70%;
+  }
+
+  #season {
+    width: 10%;
+  }
+
+  #games {
+    width: 10%;
+  }
+
+  #points,
+  #threePoints,
+  #assists,
+  #rebounds,
+  #steals,
+  #blocks {
+    width: 10%;
   }
 }
