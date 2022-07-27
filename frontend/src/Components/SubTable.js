@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import usePagination from "../hooks/usePagination";
 import Pagination from "./Pagination";
 
-const TableAssists = ({ name, fullStats, category, header, rowsPerPage }) => {
+const SubTable = ({ name, fullStats, category, header, rowsPerPage }) => {
 	const [stats, setStats] = useState("");
 	const [order, setOrder] = useState({
 		[category]: "ascending",
@@ -87,7 +87,10 @@ const TableAssists = ({ name, fullStats, category, header, rowsPerPage }) => {
 
 	return (
 		<div className="table-responsive-sm">
-			<table className="table table-hover table-striped caption-top">
+			<table
+				className="table table-hover table-striped caption-top"
+				style={range <= 1 ? { marginBottom: 0 } : {}}
+			>
 				<caption>{name}</caption>
 				<thead>
 					<tr>
@@ -146,4 +149,4 @@ const TableAssists = ({ name, fullStats, category, header, rowsPerPage }) => {
 	);
 };
 
-export default TableAssists;
+export default SubTable;

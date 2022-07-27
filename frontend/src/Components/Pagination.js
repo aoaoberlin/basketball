@@ -15,7 +15,7 @@ const Pagination = ({ setPage, page, slice, range }) => {
 	};
 	const getPaginationGroup = () => {
 		const pageLimit = 3;
-		let start = Math.floor((page - 1) / pageLimit) * pageLimit;
+		const start = Math.floor((page - 1) / pageLimit) * pageLimit;
 		return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
 	};
 
