@@ -11,7 +11,7 @@ app.get("/api/", (req, res) => {
 	res.send("hello world");
 });
 
-const filter = { games: { $gte: 10 } };
+const filter = { games: { $gte: 25 } };
 const projection = {
 	points: { name: 1, season: 1, games: 1, points: 1 },
 	threePoints: { name: 1, season: 1, games: 1, threePoints: 1 },
