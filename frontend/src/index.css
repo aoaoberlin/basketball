@@ -3,6 +3,16 @@
   margin-top: 15px;
 }
 
+/* Github button */
+.button-box {
+  margin-top: 15px;
+}
+
+/* Github button */
+.card.text-center {
+  border: none;
+}
+
 /* Search input */
 .form-control {
   margin-bottom: 15px;
@@ -29,15 +39,6 @@ caption {
 /* Table header */
 .th-pointer {
   cursor: pointer;
-}
-
-/*Github button*/
-.button-box {
-  padding-top: 10px;
-}
-
-.card.text-center {
-  border: none;
 }
 
 /* Table font size */
