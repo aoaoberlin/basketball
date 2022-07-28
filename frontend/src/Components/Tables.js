@@ -84,19 +84,6 @@ const Tables = () => {
 				<div className="col-sm-6">
 					<div className="card">
 						<SubTable
-							name="Three-Point Goals Made"
-							fullStats={filteredStats[1]}
-							category={"threePoints"}
-							header={"3FGM"}
-							rowsPerPage={rowsPerPage}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-sm-6">
-					<div className="card">
-						<SubTable
 							name={"Assists"}
 							fullStats={filteredStats[2]}
 							category={"assists"}
@@ -105,6 +92,8 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
+			</div>
+			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<SubTable
@@ -116,8 +105,6 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
-			</div>
-			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<SubTable
@@ -129,6 +116,8 @@ const Tables = () => {
 						/>
 					</div>
 				</div>
+			</div>
+			<div className="row">
 				<div className="col-sm-6">
 					<div className="card">
 						<SubTable
@@ -136,6 +125,17 @@ const Tables = () => {
 							fullStats={filteredStats[5]}
 							category={"blocks"}
 							header={"BLK"}
+							rowsPerPage={rowsPerPage}
+						/>
+					</div>
+				</div>
+				<div className="col-sm-6">
+					<div className="card">
+						<SubTable
+							name="Three-Pointers Made"
+							fullStats={filteredStats[1]}
+							category={"threePoints"}
+							header={"3FGM"}
 							rowsPerPage={rowsPerPage}
 						/>
 					</div>

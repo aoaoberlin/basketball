@@ -31,6 +31,15 @@ caption {
   cursor: pointer;
 }
 
+/*Github button*/
+.button-box {
+  padding-top: 10px;
+}
+
+.card.text-center {
+  border: none;
+}
+
 /* Table font size */
 @media screen and (max-width: 1200px) {
   .text-responsive {
