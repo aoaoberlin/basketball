@@ -6,5 +6,6 @@
 /frontend/.env.development
 /frontend/build
 .env
-.vscode
 seeds.js
+.vscode
+.DS_Store
